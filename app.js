@@ -18,9 +18,8 @@ var express = require("express"),
 var moment = require("moment");
 
 // var url =process.env.DATABASEURL|| "mongodb://localhost/LeaveApp";
-var url =process.env.DATABASEURL|| "mongodb+srv://neha:nehajakhar@cluster0.xmner.mongodb.net/Main-security-system?retryWrites=true&w=majority";
-mongoose
-  .connect(url, {
+var url =process.env.DATABASEURL|| "";
+mongoose.connect(url, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
