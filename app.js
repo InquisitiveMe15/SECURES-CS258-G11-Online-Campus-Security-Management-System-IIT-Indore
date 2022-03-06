@@ -11,6 +11,7 @@ var express = require("express"),
   flash = require("connect-flash"),
   Student = require("./models/student"),
   Warden = require("./models/warden"),
+  timeTable = require("./models/timeTable"),
   Hod = require("./models/hod"),
   Leave = require("./models/leave");
 
@@ -106,6 +107,7 @@ function ensureAuthenticated(req, res, next) {
     res.redirect("/student/login");
   }
 }
+
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -808,6 +810,19 @@ app.post("/warden/:id/leave/:stud_id/info", (req, res) => {
           }
         });
     }
+  });
+});
+
+app.get("/warden/:id/timeTable", (req,res) => {
+  Warden.findById(req.params.id).exec((err, wardenFound) => {
+    if (err) {
+      req.flash("error", "warden not found with requested id");
+      res.redirect("back");
+    } else {
+  res.render("timeTable", {
+    timeTable : timeTable
+  });
+}
   });
 });
 //logout for student

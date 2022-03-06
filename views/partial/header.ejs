@@ -20,6 +20,22 @@
     />
 
     <link rel="stylesheet" href="/stylesheets/app.css" />
+    <style>
+      table input[type="text"] {
+        /* place any styling here */
+        color: red;
+      }
+  
+      table input[type="text"]:read-only {
+        border: none;
+        color: blue;
+        /* border: 6px solid black; */
+      }
+  
+      #save {
+        display: none;
+      }
+    </style>
   </head>
   <body data-spy="scroll" data-target="#mainNavbar" data-offset="10">
 
@@ -116,5 +132,5 @@
       </div>
       <% } %>
     </div>
-  </body>
-</html>
+  <!-- </body>
+</html> -->
