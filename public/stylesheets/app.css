@@ -13,11 +13,12 @@ body {
   position: relative;
 }
 .contact {
-   position: relative;
-  z-index: 2; 
+  position: relative;
+  z-index: 2;
   border-width: 0ch;
   border-color: #535555;
   text-align: center;
+  padding: 25px 0;
 }
 .btn {
   -webkit-transition-duration: 0.4s; /* Safari */
@@ -62,10 +63,11 @@ p {
   clear: both;
 }
 .carousel {
-  margin-bottom: 60px;
+  margin-top:0px;
+  margin-bottom:0px;
 }
 .fixed-height {
-  max-height: 400px;
+  max-height: 600px;
 }
 .carousel-item {
   min-height: 300px;
@@ -127,7 +129,7 @@ li a:hover {
   margin: 25px 0;
   font-size: 0.9em;
   min-width: 400px;
-  
+
 }
 .content-table thead tr {
   background-color: #009879;
@@ -146,14 +148,19 @@ li a:hover {
   border-bottom: 2px solid rgb(9, 1, 19);
 }
 .custom{
-  margin-top: 50px;
+  margin-top: 0px;
   background-color: #535555;
 }
 .para{
   color: #f3f3f3;
+  width:55%;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  line-height: 1.7;
 }
 .info{
-  margin-top: 20px;
+  margin-top: 0px;
   padding:30px;
   background-color: #5f5f6d;;
 }
