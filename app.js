@@ -125,7 +125,17 @@ app.get("/", (req, res) => {
 
 //registration form
 app.get("/register", (req, res) => {
+  res.render("loginForRegister");
+  //res.render("register");
+});
+//validating before allowing Registration permission
+app.post("/student/registerCheck",(req,res) => {
+  var enteredPassword = req.body.password;
+  if(enteredPassword=="123456"){
+  res.render("loginForRegister");
+}else{
   res.render("register");
+}
 });
 //registration logic
 app.post("/student/register", (req, res) => {
