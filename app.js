@@ -151,13 +151,15 @@ app.post("/student/register", (req, res) => {
     var password = req.body.password;
     var password2 = req.body.password2;
     var hostel = req.body.hostel;
-    // var department = req.body.department;
+    var phonenumber = req.body.phonenumber;
+    var emailid = req.body.emailid;
     var image = req.body.image;
     //validation
     req.checkBody("name", "name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("hostel", "hostel is required").notEmpty();
-    // req.checkBody("department", "department is required").notEmpty();
+    req.checkBody("phonenumber", "phonenumber is required").notEmpty();
+    req.checkBody("emailid", "emailid is required").notEmpty();
     req.checkBody("password", "Password is required").notEmpty();
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
@@ -174,7 +176,8 @@ app.post("/student/register", (req, res) => {
         name: name,
         username: username,
         password: password,
-        // department: department,
+        phonenumber: phonenumber,
+        emailid : emailid,
         hostel: hostel,
         type: type,
         image: image
@@ -230,12 +233,16 @@ app.post("/student/register", (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
+    var phonenumber = req.body.phonenumber;
+    var emailid = req.body.emailid;
     var hostel = req.body.hostel;
     var image = req.body.image;
 
     req.checkBody("name", "Name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("password", "password is required").notEmpty();
+    req.checkBody("phonenumber", "phonenumber is required").notEmpty();
+    req.checkBody("emailid", "emailid is required").notEmpty();
     req.checkBody("hostel", "hostel is required").notEmpty();
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
@@ -249,6 +256,8 @@ app.post("/student/register", (req, res) => {
         name: name,
         username: username,
         password: password,
+        phonenumber : phonenumber,
+        emailid : emailid,
         hostel: hostel,
         type: type,
         image: image
@@ -892,7 +901,7 @@ app.post('/editTimeTable',(req,res)=>{
     }
     
     )
-    res.redirect("/warden/62223f9190e9493a2819e287/timeTable");
+    res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable");
 //   timeTable.findAndUpdate({ "ID" : "1"},
 //   {"shift1_1": req.body.shift1_1,
 //   "shift2_1": req.body.shift2_1,

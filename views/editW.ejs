@@ -46,6 +46,32 @@ width: 40%;
                 name="warden[username]"
               />
             </div>
+            <div class=" form-group form-inline">
+              <label for="phonenumber" style="width: 200px;
+              display: inline-block;
+              text-align: right;
+              ">Phone Number</label>
+            <input
+              class="form-control"
+              type="text"
+              id="phonenumber"
+              value="<%= warden.phonenumber%>"
+              name="warden[phonenumber]"
+            />
+          </div>
+          <div class=" form-group form-inline">
+              <label for="emailid" style="width: 200px;
+              display: inline-block;
+              text-align: right;
+              ">Email Id</label>
+            <input
+              class="form-control"
+              type="text"
+              id="emailid"
+              value="<%= warden.emailid%>"
+              name="warden[emailid]"
+            />
+          </div>
             <div class="form-group form-inline">
               <label
                 for="hostel"
@@ -53,7 +79,7 @@ width: 40%;
                     display: inline-block;
                     text-align: right;
                     "
-                >Hostel</label
+                >Office</label
               >
               <input
                 class="form-control"

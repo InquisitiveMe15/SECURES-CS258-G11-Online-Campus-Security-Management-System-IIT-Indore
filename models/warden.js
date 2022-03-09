@@ -7,6 +7,8 @@ var wardenSchema = new mongoose.Schema({
   type: String,
   username: String,
   password: String,
+  phonenumber : String,
+  emailid : String,
   hostel: String,
   image: String
 });
