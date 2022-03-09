@@ -211,8 +211,12 @@ width: 40%;
               ">
                 <input type="radio" id="r1" name="type" value="student" />
                 Employee
-                <input type="radio" id="r3" name="type" value="warden" style="margin-left:20px;"/>
-                Manager/Office
+
+                <!-- <input type="radio" id="r2" name="type" value="hod" />
+                HOD -->
+                <input type="radio" id="r3" name="type" value="warden" />
+                Warden
+
               </div>
 
               <!-- id -->
@@ -261,32 +265,65 @@ width: 40%;
                   placeholder="Email-ID"
                 />
               </div>
+
+              <!-- Phone number -->
+              <div class="form-group form-inline">
+                  <label for="phonenumber" style="width: 200px;
+                  display: inline-block;
+                  text-align: right;
+                  ">Phone Number</label>
+                  <!-- already commented out -->
+                <!-- <label for="department">Department</label> -->
+=======
               <!-- image -->
               <div class="form-group form-inline">
                   <label for="img"style="width: 200px;
                   display: inline-block;
                   margin-left:25px;
                   ">Image Url</label>
+
                 <input
                   class="form-control"
                   type="text"
-                  id="img"
-                  placeholder="Image url"
-                  name="image"
+
+                  placeholder="phonenumber"
+                  id="phonenumber"
+                  name="phonenumber"
+                />
+              </div>
+              <!-- Phone number -->
+              <div class="form-group form-inline">
+                  <label for="emailid" style="width: 200px;
+                  display: inline-block;
+                  text-align: right;
+                  ">Email Id</label>
+                  <!-- already commented out -->
+                <!-- <label for="department">Department</label> -->
+                <input
+                  class="form-control"
+                  
+                  type="text"
+                  placeholder="emailid"
+                  id="emailid"
+                  name="emailid"
+
                 />
               </div>
               <!-- password -->
               <div class="form-group form-inline">
                   <label for="password"style="width: 200px;
                   display: inline-block;
-                  margin-left:25px;
-                  ">Password</label>
+
+                  text-align: right;
+                  ">Office</label>
+                <!-- <label for="hostel">Hostel</label> -->
                 <input
                   class="form-control"
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
+                  type="text"
+                  name="hostel"
+                  id="hostel"
+                  placeholder="Office"
+
                 />
               </div>
               <!-- confirm password -->

@@ -126,17 +126,24 @@ app.get("/", (req, res) => {
 //registration form
 app.get("/register", (req, res) => {
   res.render("loginForRegister");
-  //res.render("register");
+
+  // res.render("register");
 });
 //validating before allowing Registration permission
+
 app.post("/student/registerCheck",(req,res) => {
   var enteredPassword = req.body.password;
   if(enteredPassword=="123456"){
-  res.render("loginForRegister");
-}else{
+    console.log("correct");
   res.render("register");
+}else{
+  console.log("incorrect");
+  // alert();
+  res.render("loginForRegister");
+
 }
 });
+
 //registration logic
 app.post("/student/register", (req, res) => {
   var type = req.body.type;
@@ -144,13 +151,20 @@ app.post("/student/register", (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
+
+    var hostel = req.body.hostel;
+
     var phonenumber = req.body.phonenumber;
     var emailid = req.body.emailid;
     var image = req.body.image;
     //validation
     req.checkBody("username", "Username is required").notEmpty();
-    req.checkBody("phonenumber", "Phone Number is required").notEmpty();
-    req.checkBody("emailid", "Email ID is required").notEmpty();
+
+    req.checkBody("hostel", "department is required").notEmpty();
+    req.checkBody("phonenumber", "phonenumber is required").notEmpty();
+    req.checkBody("emailid", "emailid is required").notEmpty();
+
+
     req.checkBody("password", "Password is required").notEmpty();
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
@@ -166,8 +180,11 @@ app.post("/student/register", (req, res) => {
       var newStudent = new Student({
         username: username,
         password: password,
-        emailid: emailid,
+
         phonenumber: phonenumber,
+        emailid : emailid,
+        hostel: hostel,
+
         type: type,
         image: image
       });
@@ -223,12 +240,18 @@ app.post("/student/register", (req, res) => {
     var password2 = req.body.password2;
     var phonenumber = req.body.phonenumber;
     var emailid = req.body.emailid;
+
+    var hostel = req.body.hostel;
+
     var image = req.body.image;
 
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("password", "password is required").notEmpty();
-    req.checkBody("phonenumber", "Phone Number is required").notEmpty();
-    req.checkBody("emailid", "Email ID is required").notEmpty();
+
+    req.checkBody("phonenumber", "phonenumber is required").notEmpty();
+    req.checkBody("emailid", "emailid is required").notEmpty();
+    req.checkBody("hostel", "hostel is required").notEmpty();
+
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
     var errors = req.validationErrors();
@@ -240,8 +263,11 @@ app.post("/student/register", (req, res) => {
       var newWarden = new Warden({
         username: username,
         password: password,
-        emailid: emailid,
-        phonenumber: phonenumber,
+
+        phonenumber : phonenumber,
+        emailid : emailid,
+        hostel: hostel,
+
         type: type,
         image: image
       });
@@ -855,6 +881,66 @@ app.get("/warden/:id/timeTable", (req,res) => {
   });
 
 });
+
+app.post('/editTimeTable',(req,res)=>{
+  console.log(req.body.shift1_1);
+   timeTable.updateMany(
+    {}, //match all
+    {
+        $set: {
+          "shift1_1": req.body.shift1_1,
+          "shift2_1": req.body.shift2_1,
+          "shift3_1": req.body.shift3_1,
+          "shift1_2": req.body.shift1_2,
+          "shift2_2": req.body.shift2_1,
+          "shift3_2": req.body.shift3_1,
+          "shift1_3": req.body.shift1_3,
+          "shift2_3": req.body.shift2_3,
+          "shift3_3": req.body.shift3_3,
+          "shift1_4": req.body.shift1_4,
+          "shift2_4": req.body.shift2_4,
+          "shift3_4": req.body.shift3_4,
+          "shift1_5": req.body.shift1_5,
+          "shift2_5": req.body.shift2_5,
+          "shift3_5": req.body.shift3_5
+        }
+    }, 
+    {
+        multi: true,
+    }
+    
+    )
+    res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable");
+//   timeTable.findAndUpdate({ "ID" : "1"},
+//   {"shift1_1": req.body.shift1_1,
+//   "shift2_1": req.body.shift2_1,
+//   "shift3_1": req.body.shift3_1,
+//   "shift1_2": req.body.shift1_2,
+//   "shift2_2": req.body.shift2_1,
+//   "shift3_2": req.body.shift3_1,
+//   "shift1_3": req.body.shift1_3,
+//   "shift2_3": req.body.shift2_3,
+//   "shift3_3": req.body.shift3_3,
+//   "shift1_4": req.body.shift1_4,
+//   "shift2_4": req.body.shift2_4,
+//   "shift3_4": req.body.shift3_4,
+//   "shift1_5": req.body.shift1_5,
+//   "shift2_5": req.body.shift2_5,
+//   "shift3_5": req.body.shift3_5
+// }, 
+//     function(err, result){
+
+//     if(err){
+//         res.send(err)
+//     }
+//     else{
+//         res.redirect("/warden/62223f9190e9493a2819e287/timeTable");
+//     }
+
+// })
+});
+  
+
 //logout for student
 
 app.get("/logout", (req, res) => {
