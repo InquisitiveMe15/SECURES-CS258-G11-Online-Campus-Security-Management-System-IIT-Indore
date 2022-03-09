@@ -125,8 +125,23 @@ app.get("/", (req, res) => {
 
 //registration form
 app.get("/register", (req, res) => {
-  res.render("register");
+  res.render("loginForRegister");
+  // res.render("register");
 });
+//validating before allowing Registration permission
+
+app.post("/student/registerCheck",(req,res) => {
+  var enteredPassword = req.body.password;
+  if(enteredPassword=="123456"){
+    console.log("correct");
+  res.render("register");
+}else{
+  console.log("incorrect");
+  // alert();
+  res.render("loginForRegister");
+}
+});
+
 //registration logic
 app.post("/student/register", (req, res) => {
   var type = req.body.type;
@@ -136,13 +151,13 @@ app.post("/student/register", (req, res) => {
     var password = req.body.password;
     var password2 = req.body.password2;
     var hostel = req.body.hostel;
-    var department = req.body.department;
+    // var department = req.body.department;
     var image = req.body.image;
     //validation
     req.checkBody("name", "name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("hostel", "hostel is required").notEmpty();
-    req.checkBody("department", "department is required").notEmpty();
+    // req.checkBody("department", "department is required").notEmpty();
     req.checkBody("password", "Password is required").notEmpty();
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
@@ -159,7 +174,7 @@ app.post("/student/register", (req, res) => {
         name: name,
         username: username,
         password: password,
-        department: department,
+        // department: department,
         hostel: hostel,
         type: type,
         image: image

@@ -7,7 +7,7 @@ var studentSchema = new mongoose.Schema({
   type: String,
   username: String,
   password: String,
-  department: String,
+  // department: String,
   hostel: String,
   image: String,
   leaves: [
