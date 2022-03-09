@@ -126,6 +126,7 @@ app.get("/", (req, res) => {
 //registration form
 app.get("/register", (req, res) => {
   res.render("loginForRegister");
+
   // res.render("register");
 });
 //validating before allowing Registration permission
@@ -139,6 +140,7 @@ app.post("/student/registerCheck",(req,res) => {
   console.log("incorrect");
   // alert();
   res.render("loginForRegister");
+
 }
 });
 
@@ -146,20 +148,22 @@ app.post("/student/registerCheck",(req,res) => {
 app.post("/student/register", (req, res) => {
   var type = req.body.type;
   if (type == "student") {
-    var name = req.body.name;
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
+
     var hostel = req.body.hostel;
+
     var phonenumber = req.body.phonenumber;
     var emailid = req.body.emailid;
     var image = req.body.image;
     //validation
-    req.checkBody("name", "name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("hostel", "department is required").notEmpty();
     req.checkBody("phonenumber", "phonenumber is required").notEmpty();
     req.checkBody("emailid", "emailid is required").notEmpty();
+
+
     req.checkBody("password", "Password is required").notEmpty();
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
@@ -173,12 +177,13 @@ app.post("/student/register", (req, res) => {
       });
     } else {
       var newStudent = new Student({
-        name: name,
         username: username,
         password: password,
+
         phonenumber: phonenumber,
         emailid : emailid,
         hostel: hostel,
+
         type: type,
         image: image
       });
@@ -227,20 +232,21 @@ app.post("/student/register", (req, res) => {
 
   //     res.redirect("/hod/login");
   //   }
-  // } 
+  // }
   else if (type == "warden") {
-    var name = req.body.name;
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
     var phonenumber = req.body.phonenumber;
     var emailid = req.body.emailid;
+
     var hostel = req.body.hostel;
+
     var image = req.body.image;
 
-    req.checkBody("name", "Name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("password", "password is required").notEmpty();
+
     req.checkBody("phonenumber", "phonenumber is required").notEmpty();
     req.checkBody("emailid", "emailid is required").notEmpty();
     req.checkBody("hostel", "department is required").notEmpty();
@@ -253,12 +259,13 @@ app.post("/student/register", (req, res) => {
       });
     } else {
       var newWarden = new Warden({
-        name: name,
         username: username,
         password: password,
+
         phonenumber : phonenumber,
         emailid : emailid,
         hostel: hostel,
+
         type: type,
         image: image
       });
@@ -514,7 +521,7 @@ app.get("/student/:id/track", (req, res) => {
         req.flash("error", "No student with requested id");
         res.redirect("back");
       } else {
-        
+
         res.render("trackLeave", { student: foundStud, moment: moment });
       }
     });
