@@ -159,7 +159,6 @@ app.post("/student/register", (req, res) => {
     var image = req.body.image;
     //validation
     req.checkBody("username", "Username is required").notEmpty();
-
     req.checkBody("hostel", "department is required").notEmpty();
     req.checkBody("phonenumber", "phonenumber is required").notEmpty();
     req.checkBody("emailid", "emailid is required").notEmpty();
@@ -250,8 +249,7 @@ app.post("/student/register", (req, res) => {
 
     req.checkBody("phonenumber", "phonenumber is required").notEmpty();
     req.checkBody("emailid", "emailid is required").notEmpty();
-    req.checkBody("hostel", "hostel is required").notEmpty();
-
+    req.checkBody("hostel", "department is required").notEmpty();
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
     var errors = req.validationErrors();
