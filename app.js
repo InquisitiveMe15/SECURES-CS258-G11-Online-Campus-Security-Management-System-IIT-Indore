@@ -157,7 +157,7 @@ app.post("/student/register", (req, res) => {
     //validation
     req.checkBody("name", "name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
-    req.checkBody("hostel", "hostel is required").notEmpty();
+    req.checkBody("hostel", "department is required").notEmpty();
     req.checkBody("phonenumber", "phonenumber is required").notEmpty();
     req.checkBody("emailid", "emailid is required").notEmpty();
     req.checkBody("password", "Password is required").notEmpty();
@@ -243,7 +243,7 @@ app.post("/student/register", (req, res) => {
     req.checkBody("password", "password is required").notEmpty();
     req.checkBody("phonenumber", "phonenumber is required").notEmpty();
     req.checkBody("emailid", "emailid is required").notEmpty();
-    req.checkBody("hostel", "hostel is required").notEmpty();
+    req.checkBody("hostel", "department is required").notEmpty();
     req.checkBody("password2", "Password dont match").equals(req.body.password);
 
     var errors = req.validationErrors();
