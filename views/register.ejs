@@ -1,4 +1,162 @@
-<% include ./partial/header %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Security - IIT INDORE</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/stylesheets/app.css" />
+    <style>
+      table input[type="text"] {
+        /* place any styling here */
+        color: red;
+      }
+
+      table input[type="text"]:read-only {
+        border: none;
+        color: blue;
+        /* border: 6px solid black; */
+      }
+
+      #save {
+        display: none;
+      }
+    </style>
+  </head>
+  <body data-spy="scroll" data-target="#mainNavbar" data-offset="10">
+
+<div class="navcustom">
+    <nav
+      id="mainNavbar"
+      class="navbar navbar-default navbar-expand-lg navbar-dark navbar-fixed-top "
+    >
+      <div class="container">
+        <a class="navbar-brand" href="/">SECURES</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul
+            class="navbar-nav ml-auto"
+            style=" list-style-type: none;
+          margin: 0;
+          padding: 0;
+          width: 363px;"
+          >
+            <% if(user){%>
+            <!-- <li><a href="#">Signed in as <%= user.type%></a></li> -->
+
+            <li class="nav-item">
+              <a class="nav-link " style="margin-left: 284px" href="/logout"
+                >Logout
+              </a>
+            </li>
+
+            <%}%> <% if(!user){%>
+            <li class="nav-item">
+              <!-- have to add section of content in the landing page -->
+              <a class="nav-link" href="/#carouselExampleIndicators"> About Us </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#contact"> Contact </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Login
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <!-- have to change name of routes -->
+                  <a class="dropdown-item" href="/student/login">Employee</a>
+                </li>
+                <!-- <li><a class="dropdown-item" href="/hod/login">HOD</a></li> -->
+
+                <li>
+                  <a class="dropdown-item" href="/warden/login">Office</a>
+                </li>
+              </ul>
+            </li>
+            <%}%>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br>
+  </div>
+
+    <div class="container">
+      <% if(error && error.length >0){%>
+      <div
+        class="alert alert-danger"
+        style="position: relative;top: 100px;"
+        role="alert"
+      >
+        <%= error %>
+      </div>
+      <% } %> <% if(success && success.length >0){%>
+      <div class="alert alert-success" style="top:100px;" role="alert">
+        <%= success %>
+      </div>
+      <% } %>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="lop"style="border:1px solid pink;">
     <% if (locals.errors) { %>
       <div class="alert alert-danger" role="alert"style="">
@@ -21,48 +179,52 @@ width: 40%;
 
 >
 
-        
 
-        <form action="/student/register" method="POST" style="margin: 0 auto;">
+
+        <form action="/student/register" method="POST" style="margin: 30px auto;">
           <div class="row">
             <div class="col">
-              <h2 style="    text-align: center;">
-                Register
+              <h2 style="    text-align: center;font-weight:bold;letter-spacing:1.4px;margin-bottom:30px;">
+                REGISTER
               </h2>
-              <div class="form-group form-inline">
+              <!-- <div class="form-group form-inline">
                 <label for="name" style="width: 200px;
                 display: inline-block;
-                text-align: right;
+                margin-left:25px;
                 ">Name</label>
                 <input
                   class="form-control"
                   type="text"
                   id="name"
                   placeholder="name"
-                  name="name"
+                  name="Name"
                   style="float: left;;
                   text-align: left;
                   "
                 />
-              </div>
+              </div> -->
               <!-- type -->
               <div id="rates" class="form-group"style="width: 400px;
               display: inline-block;
-              text-align: right;
+
+              margin-left:25px;
               ">
                 <input type="radio" id="r1" name="type" value="student" />
                 Employee
+
                 <!-- <input type="radio" id="r2" name="type" value="hod" />
                 HOD -->
                 <input type="radio" id="r3" name="type" value="warden" />
                 Warden
+
               </div>
 
               <!-- id -->
               <div class="form-group form-inline">
                   <label for="username" style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+
+                  margin-left:25px;
                   ">Username</label>
                 <input
                   class="form-control"
@@ -72,34 +234,38 @@ width: 40%;
                   name="username"
                 />
               </div>
-              <!-- password -->
+              <!-- phonenumber -->
               <div class="form-group form-inline">
-                  <label for="password"style="width: 200px;
+                  <label for="phonenumber"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
-                  ">Password</label>
+                  margin-left:25px;
+                  ">Phone Number</label>
+                <!-- <label for="department">Department</label> -->
                 <input
                   class="form-control"
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="password"
+
+                  type="text"
+                  placeholder="Phone Number"
+                  id="phonenumber"
+                  name="phonenumber"
                 />
               </div>
-              <!-- confirm password -->
+              <!-- emailid -->
               <div class="form-group form-inline">
-                  <label for="cpassword"style="width: 200px;
+                  <label for="emailid"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
-                  ">Confirm Password</label>
+                  margin-left:25px;
+                  ">Email-ID</label>
+                <!-- <label for="hostel">Hostel</label> -->
                 <input
                   class="form-control"
-                  type="password"
-                  id="cpassword"
-                  name="password2"
-                  placeholder="Confirm password"
+                  type="text"
+                  name="emailid"
+                  id="emailid"
+                  placeholder="Email-ID"
                 />
               </div>
+
               <!-- Phone number -->
               <div class="form-group form-inline">
                   <label for="phonenumber" style="width: 200px;
@@ -108,10 +274,18 @@ width: 40%;
                   ">Phone Number</label>
                   <!-- already commented out -->
                 <!-- <label for="department">Department</label> -->
+=======
+              <!-- image -->
+              <div class="form-group form-inline">
+                  <label for="img"style="width: 200px;
+                  display: inline-block;
+                  margin-left:25px;
+                  ">Image Url</label>
+
                 <input
                   class="form-control"
-                  
                   type="text"
+
                   placeholder="phonenumber"
                   id="phonenumber"
                   name="phonenumber"
@@ -132,12 +306,14 @@ width: 40%;
                   placeholder="emailid"
                   id="emailid"
                   name="emailid"
+
                 />
               </div>
-              <!-- hostel -->
+              <!-- password -->
               <div class="form-group form-inline">
-                  <label for="hostel"style="width: 200px;
+                  <label for="password"style="width: 200px;
                   display: inline-block;
+
                   text-align: right;
                   ">Office</label>
                 <!-- <label for="hostel">Hostel</label> -->
@@ -147,28 +323,30 @@ width: 40%;
                   name="hostel"
                   id="hostel"
                   placeholder="Office"
+
                 />
               </div>
-              <!-- image -->
+              <!-- confirm password -->
               <div class="form-group form-inline">
-                  <label for="img"style="width: 200px;
+                  <label for="cpassword"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
-                  ">Image Url</label>
+                  margin-left:25px;
+                  ">Confirm Password</label>
                 <input
                   class="form-control"
-                  type="text"
-                  id="img"
-                  placeholder="img url"
-                  name="image"
+                  type="password"
+                  id="cpassword"
+                  name="password2"
+                  placeholder="Confirm password"
                 />
               </div>
+
 
               <div class="form-group">
                 <button
                   type="submit"
                   class="btn btn-lg btn-primary btn-default btn-block"
-                  style=" color:#fff;"
+                  style=" color:#fff;margin-top:30px;"
                 >
                   Submit
                 </button>
@@ -178,9 +356,9 @@ width: 40%;
           <!-- name -->
         </form>
 
-        <a href="/">Back</a>
+        <a href="/" style="margin-left:35px;">Back</a>
       </div>
     </div>
   </div>
-  <% include ./partial/footer %>
+
 </div>
