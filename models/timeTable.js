@@ -16,7 +16,8 @@ var timeTableSchema = new mongoose.Schema(
         shift3_4 : String,
         shift1_5 : String,
         shift2_5 : String,
-        shift3_5 : String
+        shift3_5 : String,
+        ID : String
 
     }
 );

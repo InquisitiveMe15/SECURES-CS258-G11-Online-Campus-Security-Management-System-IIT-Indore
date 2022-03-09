@@ -863,6 +863,66 @@ app.get("/warden/:id/timeTable", (req,res) => {
   });
 
 });
+
+app.post('/editTimeTable',(req,res)=>{
+  console.log(req.body.shift1_1);
+   timeTable.updateMany(
+    {}, //match all
+    {
+        $set: {
+          "shift1_1": req.body.shift1_1,
+          "shift2_1": req.body.shift2_1,
+          "shift3_1": req.body.shift3_1,
+          "shift1_2": req.body.shift1_2,
+          "shift2_2": req.body.shift2_1,
+          "shift3_2": req.body.shift3_1,
+          "shift1_3": req.body.shift1_3,
+          "shift2_3": req.body.shift2_3,
+          "shift3_3": req.body.shift3_3,
+          "shift1_4": req.body.shift1_4,
+          "shift2_4": req.body.shift2_4,
+          "shift3_4": req.body.shift3_4,
+          "shift1_5": req.body.shift1_5,
+          "shift2_5": req.body.shift2_5,
+          "shift3_5": req.body.shift3_5
+        }
+    }, 
+    {
+        multi: true,
+    }
+    
+    )
+    res.redirect("/warden/62223f9190e9493a2819e287/timeTable");
+//   timeTable.findAndUpdate({ "ID" : "1"},
+//   {"shift1_1": req.body.shift1_1,
+//   "shift2_1": req.body.shift2_1,
+//   "shift3_1": req.body.shift3_1,
+//   "shift1_2": req.body.shift1_2,
+//   "shift2_2": req.body.shift2_1,
+//   "shift3_2": req.body.shift3_1,
+//   "shift1_3": req.body.shift1_3,
+//   "shift2_3": req.body.shift2_3,
+//   "shift3_3": req.body.shift3_3,
+//   "shift1_4": req.body.shift1_4,
+//   "shift2_4": req.body.shift2_4,
+//   "shift3_4": req.body.shift3_4,
+//   "shift1_5": req.body.shift1_5,
+//   "shift2_5": req.body.shift2_5,
+//   "shift3_5": req.body.shift3_5
+// }, 
+//     function(err, result){
+
+//     if(err){
+//         res.send(err)
+//     }
+//     else{
+//         res.redirect("/warden/62223f9190e9493a2819e287/timeTable");
+//     }
+
+// })
+});
+  
+
 //logout for student
 
 app.get("/logout", (req, res) => {
