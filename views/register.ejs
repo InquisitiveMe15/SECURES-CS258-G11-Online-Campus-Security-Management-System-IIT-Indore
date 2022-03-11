@@ -1,10 +1,9 @@
-<% include ./partial/header %>
+<<% include ./partial/header %>
 <div class="lop"style="border:1px solid pink;">
     <% if (locals.errors) { %>
       <div class="alert alert-danger" role="alert"style="">
         <% locals.errors.forEach(function(errors) { %>
         <h5><%= errors.msg %></h5>
-
         <% }); %>
       </div>
       <% } %>
@@ -16,7 +15,6 @@ border-radius: 5px;
 background-color: #f2f2f2;
 padding: 60px 0 30px 0;
 width: 40%;
-
 "
 
 >
@@ -52,8 +50,8 @@ width: 40%;
               ">
                 <input type="radio" id="r1" name="type" value="student" />
                 Student
-                <input type="radio" id="r2" name="type" value="hod" />
-                HOD
+                <!-- <input type="radio" id="r2" name="type" value="hod" />
+                HOD -->
                 <input type="radio" id="r3" name="type" value="warden" />
                 Warden
               </div>
@@ -102,26 +100,42 @@ width: 40%;
               </div>
               <!-- Department -->
               <div class="form-group form-inline">
-                  <label for="department"style="width: 200px;
+                  <label for="phonenumber"style="width: 200px;
                   display: inline-block;
                   text-align: right;
-                  ">Department</label>
-                <!-- <label for="department">Department</label> -->
+                  ">Phone Number</label>
+                
                 <input
                   class="form-control"
                   
                   type="text"
-                  placeholder="Department"
-                  id="department"
-                  name="department"
+                  placeholder="phonenumber"
+                  id="phonenumber"
+                  name="phonenumber"
                 />
-              </div>
+              </div> 
+              <!-- emailid -->
+              <div class="form-group form-inline">
+                  <label for="emailid"style="width: 200px;
+                  display: inline-block;
+                  text-align: right;
+                  ">Email Id</label>
+                
+                <input
+                  class="form-control"
+                  
+                  type="text"
+                  placeholder="emailid"
+                  id="emailid"
+                  name="emailid"
+                />
+              </div> 
               <!-- hostel -->
               <div class="form-group form-inline">
                   <label for="hostel"style="width: 200px;
                   display: inline-block;
                   text-align: right;
-                  ">Hostel</label>
+                  ">Office</label>
                 <!-- <label for="hostel">Hostel</label> -->
                 <input
                   class="form-control"
