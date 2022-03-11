@@ -150,6 +150,7 @@ app.post("/student/registerCheck", (req, res) => {
 app.post("/student/register", (req, res) => {
   var type = req.body.type;
   if (type == "student") {
+    var name = req.body.name
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
@@ -160,6 +161,7 @@ app.post("/student/register", (req, res) => {
     var emailid = req.body.emailid;
     var image = req.body.image;
     //validation
+    req.checkBody("name", "name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("hostel", "department is required").notEmpty();
     req.checkBody("phonenumber", "phonenumber is required").notEmpty();
@@ -178,6 +180,7 @@ app.post("/student/register", (req, res) => {
       });
     } else {
       var newStudent = new Student({
+        name: name,
         username: username,
         password: password,
 
@@ -197,6 +200,8 @@ app.post("/student/register", (req, res) => {
       res.redirect("/student/login");
     }
   } else if (type == "warden") {
+
+    var name = req.body.name;
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
@@ -207,6 +212,7 @@ app.post("/student/register", (req, res) => {
 
     var image = req.body.image;
 
+    req.checkBody("name", "name is required").notEmpty();
     req.checkBody("username", "Username is required").notEmpty();
     req.checkBody("password", "password is required").notEmpty();
 
@@ -222,6 +228,7 @@ app.post("/student/register", (req, res) => {
       });
     } else {
       var newWarden = new Warden({
+        name: name,
         username: username,
         password: password,
 
