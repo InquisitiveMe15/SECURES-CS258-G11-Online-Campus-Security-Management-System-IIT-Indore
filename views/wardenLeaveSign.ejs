@@ -17,6 +17,7 @@
         Student Name
       </th>
       <th>Department</th>
+      <th>Email Id</th>
       <th>
         From
       </th>
@@ -28,7 +29,8 @@
     <%students.forEach(function(student){%> <% if(student.leaves.length>0){%>
     <tr>
       <th><%=student.name%></th>
-      <th><%=student.department%></th>
+      <th><%=student.hostel%></th>
+      <th><%=student.emailid%></th>
       <%student.leaves.forEach(function(leave){%>
       <td><%=moment(leave.from).format('DD/MM/YYYY')%></td>
       <td><%=moment(leave.to).format('DD/MM/YYYY')%></td>

@@ -3,6 +3,7 @@ var bcrypt = require("bcryptjs");
 var passportLocalMongoose = require("passport-local-mongoose");
 
 var wardenSchema = new mongoose.Schema({
+  name: String,
   type: String,
   username: String,
   password: String,
