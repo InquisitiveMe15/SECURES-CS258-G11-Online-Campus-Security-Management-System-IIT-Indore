@@ -20,7 +20,7 @@ margin-top: -181px;  text-align: -webkit-center;"
         </th>
         <th>To</th>
         <th>Days</th>
-        <th>HOD Status</th>
+        <!-- <th>HOD Status</th> -->
         <th>Warden Status</th>
         <th>Final Status</th>
         
@@ -32,9 +32,15 @@ margin-top: -181px;  text-align: -webkit-center;"
         <td><%=moment(leave.from).format('DD/MM/YYYY')%></td>
         <td><%=moment(leave.to).format('DD/MM/YYYY')%></td>
         <td><%=leave.days%></td>
-        <td><%=leave.status%></td>
+        <!-- <td><%=leave.status%></td> -->
         <td><%=leave.wardenstatus%></td>
-        <%if(leave.status==="approved" && leave.wardenstatus==="approved"){%>
+        <%if(leave.wardenstatus==="approved"){%>
+         <%leave.finalstatus="approved"%>
+        <%}%>
+        <%if(leave.wardenstatus==="denied"){%>
+          <%leave.finalstatus="denied"%>
+         <%}%>
+        <!-- <%if(leave.status==="approved" && leave.wardenstatus==="approved"){%>
          <%leave.finalstatus="approved"%>
         <%}%>
         <%if(leave.status==="denied" && leave.wardenstatus==="denied"){%>
@@ -45,7 +51,7 @@ margin-top: -181px;  text-align: -webkit-center;"
          <%}%>
          <%if(leave.status==="approved" && leave.wardenstatus==="denied"){%>
           <%leave.finalstatus="denied"%>
-         <%}%>
+         <%}%> -->
         <td><%=leave.finalstatus%></td>
       </tr>
 

@@ -7,8 +7,11 @@ var studentSchema = new mongoose.Schema({
   type: String,
   username: String,
   password: String,
-  department: String,
+  phonenumber: String,
+  emailid: String,
+  salary: String,
   hostel: String,
+
   image: String,
   leaves: [
     {

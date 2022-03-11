@@ -16,8 +16,9 @@ margin-top: -181px;  text-align: -webkit-center;"
         <h4><strong>Type:</strong><%=student.type%></h4>
 
         <h4>Username: <%=student.username%></h4>
-        <h4>Department:<%=student.department%></h4>
-        <h4>Hostel: <%=student.hostel%></h4>
+        <h4>Phone Number:<%=student.phonenumber%></h4>
+        <h4>Email Id:<%=student.emailid%></h4>
+        <h4>Office: <%=student.hostel%></h4>
       </div>
     </div>
 
@@ -43,7 +44,7 @@ margin-top: -181px;  text-align: -webkit-center;"
           <td><%=moment(leave.from).format('DD/MM/YYYY')%></td>
           <td><%=moment(leave.to).format('DD/MM/YYYY')%></td>
           <td><%=leave.days%></td>
-          <td><%=leave.status%></td>
+          <td><%=leave.finalstatus%></td>
         </tr>
 
         <%})%>
