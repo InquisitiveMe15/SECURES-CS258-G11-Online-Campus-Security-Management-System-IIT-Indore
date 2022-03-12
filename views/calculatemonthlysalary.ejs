@@ -3,7 +3,7 @@
         <br>
         <br>
         <br>
-        
+
         <h1> MONTH NO. <%= monthNo %></h1>
         <table class="content-table"
             style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
@@ -22,6 +22,9 @@
                     Phone Number
                 </th>
                 <th>Salary</th>
+                <th>
+                    No. of leaves in this month
+                </th>
                 <th>
                     Receivable Monthly Salary
                 </th>
@@ -47,6 +50,7 @@
                             value="<%=student.salary%>" readonly></input></td>
                    
                     </td>
+                    
                     <% var month=[0,0,0,0,0,0,0,0,0,0,0,0] %>
                     <%leavedata.forEach(function(leave){%>
                         <% console.log(leave.stud.username) %>
@@ -58,7 +62,9 @@
                       <%})%>
                       <% console.log((month[monthNo-1]*100)) %>
                       <% var thismonthsalary=student.salary-(month[monthNo-1]*100) %>
-                
+                <td>
+                    <%= month[monthNo-1] %>
+                </td>
                 <td>
                     <%= thismonthsalary %>
                 </td>
