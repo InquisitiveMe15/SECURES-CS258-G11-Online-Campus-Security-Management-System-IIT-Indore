@@ -1,0 +1,67 @@
+<% include ./partial/header %>
+    <div class="container">
+        <table class="content-table"
+            style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
+            <tr
+                style="background-color: rgb(9, 1, 19); border-radius: 5px 5px 0 0;overflow: hidden;  color: #ffffff;text-align: left; font-weight: bold;">
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    Department
+                </th>
+
+                <th>
+                    Email ID
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th>Monthly Receivable Salary</th>
+                <th>No of Leaves Taken In This Month</th>
+                <!-- <th></th> -->
+
+            </tr>
+
+            <%students.forEach(function(student){%>
+                <tr>
+                    <td>
+                        <%=student.name%>
+                    </td>
+                    <td>
+                        <%=student.hostel%>
+                    </td>
+                    <td>
+                        <%=student.emailid%>
+                    </td>
+                    <td>
+                        <%=student.phonenumber%>
+                    </td>
+                    <td><input type="text" id="monthlysalary" name="monthlysalary"
+                            style="border: 2px solid black; border-radius: 8px; text-align: center;"
+                            value="<%=student.monthlyReceivableSalary%>" readonly></input></td>
+                    
+                    </td>
+                    <td><input type="text" id="noofleaves" name="noofleaves"
+                            style="border: 2px solid black; border-radius: 8px; text-align: center;"
+                            value="<%=student.noOfLeavesInMonth%>" readonly></input></td>
+                    
+                    </td>
+
+
+                </tr>
+                <% }) %>
+
+
+
+        </table>
+    </div>
+
+    <div style="text-align:center">
+        
+        <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+    </div>
+   
+
+    
+    <% include ./partial/footer %>

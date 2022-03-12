@@ -33,7 +33,10 @@ var leaveSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Student"
       },
-      username: String
+      username: String,
+      name: String,
+      phonenumber: String,
+      emailid: String
     }
   },
   { timestamps: {} }
