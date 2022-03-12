@@ -1,10 +1,12 @@
-<form action="/warden/:id/calculateMonthlySalary" method="POST">
-    <div class="row">
+<% include ./partial/header %>
+<form action="/warden/<%=warden._id%>/calculateMonthlySalary" method="POST" >
+    <div class="row" style="margin-top: 40px;">
       <div class="col">
         <h2 style="    text-align: center;">
-          Enter the Month Number for which salary is to be calculated
+          Enter the Month Number for which salary is to be calculated. 
         </h2>
-        <div class="form-group">
+        <h3 style="text-align: center;">1 for January, 2 for February and so on............</h3>
+        <div class="form-group" style="max-width: 50%; text-align: center; margin: auto;">
           <input
             class="form-control"
             type="text"
@@ -15,7 +17,7 @@
 
         
 
-        <div class="form-group">
+        <div class="form-group" style="margin: auto; margin-top: 30px; max-width: 30%;">
           <button
             type="submit"
             class="btn btn-lg btn-rounded btn-primary btn-block "
@@ -26,3 +28,8 @@
       </div>
     </div>
   </form>
+  <div style="text-align:center; margin-top: 10px;">
+          
+    <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+  </div>
+  <% include ./partial/footer %>

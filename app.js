@@ -778,9 +778,9 @@ app.get("/warden/:id/calculateMonthlySalary", (req, res) => {
             res.redirect("back");
           } else {
 
-            students.forEach(function(student){
-              console.log("Hello");
-            });
+            // students.forEach(function(student){
+            //   console.log("Hello");
+            // });
             res.render("entermonth", {
               warden: wardenFound,
               students: students,
@@ -797,7 +797,10 @@ app.post("/warden/:id/calculateMonthlySalary", (req, res) => {
   var monthNo=req.body.month;
       Student.find({},function(err,data){
         var students=data;
+        // console.log(students);
         Leave.find({},function(err,leavedata){
+          var leavedata= leavedata;
+          // console.log(leavedata);
           res.render("calculatemonthlysalary",{students:students,monthNo:monthNo,leavedata:leavedata});
         });
         
