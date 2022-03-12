@@ -476,6 +476,18 @@ app.get("/student/:id/track", (req, res) => {
       }
     });
 });
+app.get("/student/:id/monthlyleaves", (req, res) => {
+  Student.findById(req.params.id)
+    .populate("leaves")
+    .exec((err, foundStud) => {
+      if (err) {
+        req.flash("error", "No student with requested id");
+        res.redirect("back");
+      } else {
+        res.render("employeemonthlyleaves", { student: foundStud, moment: moment });
+      }
+    });
+});
 
 app.get("/warden/login", (req, res) => {
   res.render("wardenlogin");
