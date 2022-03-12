@@ -1,17 +1,17 @@
 <% include ./partial/header %>
 <div
   class="col-sm-9"
-  style="margin: 50px 125px;    text-align: -webkit-center; border: 1px solid purple"
+  style="margin: auto; text-align: -webkit-center; "
 >
   <form
-    action="/warden/<%=warden.id%>/leave/<%=student.id%>/info"
+    action="/warden/<%=warden.id%>/leave/<%=leave._id%>/<%=student.id%>/info"
     method="POST"
   >
     <div
       class="container-fluid bg-3 text-center"
-      style="border: 1px solid blue"
+      
     >
-      <h1><%=student.name %></h1>
+      <h1><%=student.name%></h1>
       <br />
       <div class="row">
         <div class="col-sm-4">
@@ -21,15 +21,14 @@
             alt="image"
           />
         </div>
-        <%student.leaves.forEach(function(leave){%>
+        
         <div class="col-sm-4">
-          <h3><strong> Subject:</strong><%=leave.subject %></h3>
-          <h3>Status:<%=leave.wardenstatus %></h3>
-          <h3>From:<%=moment(leave.to).format('DD/MM/YYYY') %></h3>
-          <h3>To:<%=moment(leave.from).format('DD/MM/YYYY') %></h3>
-          <h3><%=leave.days%></h3>
-          <h3>Hostel:<%=student.hostel%></h3>
-          <h3>Department:<%=student.department %></h3>
+          <h3><strong> Subject: </strong><%=leave.subject %></h3>
+          <h3>Status: <%=leave.wardenstatus %></h3>
+          <h3>From: <%=moment(leave.to).format('DD/MM/YYYY') %></h3>
+          <h3>To: <%=moment(leave.from).format('DD/MM/YYYY') %></h3>
+          <h3>Days: <%=leave.days%></h3>
+          <h3>Department:<%=student.hostel %></h3>
           <div style="float:inherit">
             <input
               type="submit"
@@ -46,9 +45,13 @@
           </div>
         </div>
 
-        <%})%>
+        
       </div>
     </div>
   </form>
+  <div style="text-align:center; margin-top: 10px;">
+          
+    <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+  </div>
 </div>
 <% include ./partial/footer %>

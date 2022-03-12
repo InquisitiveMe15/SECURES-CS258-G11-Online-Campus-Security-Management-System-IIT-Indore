@@ -11,7 +11,8 @@ var studentSchema = new mongoose.Schema({
   emailid: String,
   salary: String,
   hostel: String,
-
+  monthlyReceivableSalary: String,
+  noOfLeavesInMonth: String,
   image: String,
   leaves: [
     {
