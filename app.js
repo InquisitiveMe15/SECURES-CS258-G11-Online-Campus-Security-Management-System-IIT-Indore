@@ -448,6 +448,10 @@ app.post("/student/:id/apply", (req, res) => {
           } else {
             newLeave.stud.id = req.user._id;
             newLeave.stud.username = req.user.username;
+            newLeave.stud.id = req.user._id;
+            newLeave.stud.name = req.user.name;
+            newLeave.stud.phonenumber = req.user.phonenumber;
+            newLeave.stud.emailid = req.user.emailid;
             console.log("leave is applied by--" + req.user.username);
 
             // console.log(newLeave.from);
@@ -544,55 +548,97 @@ app.get("/warden/:id/leave", (req, res) => {
       req.flash("error", "warden not found with requested id");
       res.redirect("back");
     } else {
-      // console.log(hodFound);
-      Student.find({ hostel: wardenFound.hostel })
-        .populate("leaves")
-        .exec((err, students) => {
-          if (err) {
-            req.flash("error", "student not found with your department");
-            res.redirect("back");
-          } else {
-            res.render("wardenLeaveSign", {
-              warden: wardenFound,
-              students: students,
 
-              moment: moment,
+            Leave.find().exec((err,leaves)=>{
+              if(err){
+                req.flash("error", "some error occured");
+                res.redirect("back");
+              } else{
+                res.render("wardenLeaveSign", {
+                  warden: wardenFound,
+                  
+                  leaves: leaves,
+                  moment: moment,
+                });
+              }
             });
+            
           }
-        });
-    }
+       
   });
 });
-app.get("/warden/:id/leave/:stud_id/info", (req, res) => {
+// app.get("/warden/:id/leave", (req, res) => {
+//   Warden.findById(req.params.id).exec((err, wardenFound) => {
+//     if (err) {
+//       req.flash("error", "warden not found with requested id");
+//       res.redirect("back");
+//     } else {
+//       // console.log(hodFound);
+//       Student.find({ hostel: wardenFound.hostel })
+//         .populate("leaves")
+//         .exec((err, students) => {
+//           if (err) {
+//             req.flash("error", "student not found with your department");
+//             res.redirect("back");
+//           } else {
+//             res.render("wardenLeaveSign", {
+//               warden: wardenFound,
+//               students: students,
+
+//               moment: moment,
+//             });
+//           }
+//         });
+//     }
+//   });
+// });
+app.get("/warden/:id/leave/:leave_id/:stud_id/info", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
       req.flash("error", "warden not found with requested id");
       res.redirect("back");
     } else {
-      Student.findById(req.params.stud_id)
+      Leave.findById(req.params.leave_id)
+        .populate("leaves")
+        .exec((err, leave) => {
+          if (err) {
+            req.flash("error", "leave not found with this id");
+            res.redirect("back");
+          } else {
+            Student.findById(req.params.stud_id)
         .populate("leaves")
         .exec((err, foundStudent) => {
           if (err) {
-            req.flash("error", "student not found with this id");
+            req.flash("error", "employee not found with this id");
             res.redirect("back");
           } else {
             res.render("Wardenmoreinfostud", {
               student: foundStudent,
+              leave: leave,
               warden: wardenFound,
               moment: moment,
             });
+          }
+        });
           }
         });
     }
   });
 });
 
-app.post("/warden/:id/leave/:stud_id/info", (req, res) => {
+app.post("/warden/:id/leave/:leave_id/:stud_id/info", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
       req.flash("error", "warden not found with requested id");
       res.redirect("back");
     } else {
+      Leave.findById(req.params.leave_id)
+        .populate("leaves")
+        .exec((err, leave) => {
+          if (err) {
+            req.flash("error", "leave not found with this id");
+            res.redirect("back");
+          } else {
       Student.findById(req.params.stud_id)
         .populate("leaves")
         .exec((err, foundStudent) => {
@@ -625,10 +671,13 @@ app.post("/warden/:id/leave/:stud_id/info", (req, res) => {
             res.render("Wardenmoreinfostud", {
               student: foundStudent,
               warden: wardenFound,
+              leave: leave,
               moment: moment,
             });
           }
         });
+      }
+    });
     }
   });
 });
@@ -701,6 +750,32 @@ app.post("/warden/:id/saveSalary", (req,res)=>{
     }
   });
 });
+
+app.get("/warden/:id/monthlySalaryW", (req, res) => {
+  Warden.findById(req.params.id).exec((err, wardenFound) => {
+    if (err) {
+      req.flash("error", "warden not found with requested id");
+      res.redirect("back");
+    } else {
+      // console.log(wardenFound);
+      Student.find({ hostel: wardenFound.hostel })
+        .exec((err, students) => {
+          if (err) {
+            req.flash("error", "student not found with your department");
+            res.redirect("back");
+          } else {
+            res.render("monthlySalaryW", {
+              warden: wardenFound,
+              students: students,
+
+              moment: moment,
+            });
+          }
+        });
+    }
+  });
+});
+
 
 app.post("/editTimeTable", (req, res) => {
   console.log(req.body.shift1_1);
