@@ -480,6 +480,18 @@ app.get("/student/:id/track", (req, res) => {
       }
     });
 });
+app.get("/student/:id/monthlyleaves", (req, res) => {
+  Student.findById(req.params.id)
+    .populate("leaves")
+    .exec((err, foundStud) => {
+      if (err) {
+        req.flash("error", "No student with requested id");
+        res.redirect("back");
+      } else {
+        res.render("employeemonthlyleaves", { student: foundStud, moment: moment });
+      }
+    });
+});
 
 app.get("/warden/login", (req, res) => {
   res.render("wardenlogin");
@@ -751,7 +763,8 @@ app.post("/warden/:id/saveSalary", (req,res)=>{
   });
 });
 
-app.get("/warden/:id/monthlySalaryW", (req, res) => {
+app.get("/warden/:id/calculateMonthlySalary", (req, res) => {
+
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
       req.flash("error", "warden not found with requested id");
@@ -764,7 +777,11 @@ app.get("/warden/:id/monthlySalaryW", (req, res) => {
             req.flash("error", "student not found with your department");
             res.redirect("back");
           } else {
-            res.render("monthlySalaryW", {
+
+            students.forEach(function(student){
+              console.log("Hello");
+            });
+            res.render("entermonth", {
               warden: wardenFound,
               students: students,
 
@@ -775,7 +792,18 @@ app.get("/warden/:id/monthlySalaryW", (req, res) => {
     }
   });
 });
-
+app.post("/warden/:id/calculateMonthlySalary", (req, res) => {
+  console.log(req.body.month);
+  var monthNo=req.body.month;
+      Student.find({},function(err,data){
+        var students=data;
+        Leave.find({},function(err,leavedata){
+          res.render("calculatemonthlysalary",{students:students,monthNo:monthNo,leavedata:leavedata});
+        });
+        
+      });
+       
+});
 
 app.post("/editTimeTable", (req, res) => {
   console.log(req.body.shift1_1);
