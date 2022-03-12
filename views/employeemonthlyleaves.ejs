@@ -9,7 +9,7 @@ margin-top: -181px;  text-align: -webkit-center;"
   <% var month=[0,0,0,0,0,0,0,0,0,0,0,0] %>
   <%student.leaves.forEach(function(leave){%>
     <%if(leave.wardenstatus==="approved"){%>
-     <% console.log(leave.from.getMonth())%>
+   
       <%month[leave.from.getMonth()]+=leave.days %>
         <%}%>
     <%})%>

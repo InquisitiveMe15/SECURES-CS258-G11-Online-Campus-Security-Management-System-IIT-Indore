@@ -713,7 +713,44 @@ app.post("/warden/:id/saveSalary", (req,res)=>{
     }
   });
 });
-
+app.get("/warden/:id/calculateMonthlySalary", (req, res) => {
+  Warden.findById(req.params.id).exec((err, wardenFound) => {
+    if (err) {
+      req.flash("error", "warden not found with requested id");
+      res.redirect("back");
+    } else {
+      // console.log(wardenFound);
+      Student.find({ hostel: wardenFound.hostel })
+        .exec((err, students) => {
+          if (err) {
+            req.flash("error", "student not found with your department");
+            res.redirect("back");
+          } else {
+            students.forEach(function(student){
+              console.log("Hello");
+            });
+            res.render("entermonth", {
+              warden: wardenFound,
+              students: students,
+              moment: moment,
+            });
+          }
+        });
+    }
+  });
+});
+app.post("/warden/:id/calculateMonthlySalary", (req, res) => {
+  console.log(req.body.month);
+  var monthNo=req.body.month;
+      Student.find({},function(err,data){
+        var students=data;
+        Leave.find({},function(err,leavedata){
+          res.render("calculatemonthlysalary",{students:students,monthNo:monthNo,leavedata:leavedata});
+        });
+        
+      });
+       
+});
 app.post("/editTimeTable", (req, res) => {
   console.log(req.body.shift1_1);
   timeTable.updateMany(
