@@ -11,11 +11,12 @@ var express = require("express"),
   flash = require("connect-flash"),
   Student = require("./models/student"),
   Warden = require("./models/warden"),
-  timeTable = require("./models/timeTable"),
+  timeTable = require("./models/TimeTable"),
   // Hod = require("./models/hod"),
   Leave = require("./models/leave");
 
 var moment = require("moment");
+const { ObjectId } = require("mongoose");
 
 // var url =process.env.DATABASEURL|| "mongodb://localhost/LeaveApp";
 var url =
@@ -150,7 +151,7 @@ app.post("/student/registerCheck", (req, res) => {
 app.post("/student/register", (req, res) => {
   var type = req.body.type;
   if (type == "student") {
-    var name = req.body.name
+    var name = req.body.name;
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
@@ -200,7 +201,6 @@ app.post("/student/register", (req, res) => {
       res.redirect("/student/login");
     }
   } else if (type == "warden") {
-
     var name = req.body.name;
     var username = req.body.username;
     var password = req.body.password;
@@ -488,7 +488,10 @@ app.get("/student/:id/monthlyleaves", (req, res) => {
         req.flash("error", "No student with requested id");
         res.redirect("back");
       } else {
-        res.render("employeemonthlyleaves", { student: foundStud, moment: moment });
+        res.render("employeemonthlyleaves", {
+          student: foundStud,
+          moment: moment,
+        });
       }
     });
 });
@@ -560,23 +563,20 @@ app.get("/warden/:id/leave", (req, res) => {
       req.flash("error", "warden not found with requested id");
       res.redirect("back");
     } else {
+      Leave.find().exec((err, leaves) => {
+        if (err) {
+          req.flash("error", "some error occured");
+          res.redirect("back");
+        } else {
+          res.render("wardenLeaveSign", {
+            warden: wardenFound,
 
-            Leave.find().exec((err,leaves)=>{
-              if(err){
-                req.flash("error", "some error occured");
-                res.redirect("back");
-              } else{
-                res.render("wardenLeaveSign", {
-                  warden: wardenFound,
-                  
-                  leaves: leaves,
-                  moment: moment,
-                });
-              }
-            });
-            
-          }
-       
+            leaves: leaves,
+            moment: moment,
+          });
+        }
+      });
+    }
   });
 });
 // app.get("/warden/:id/leave", (req, res) => {
@@ -618,20 +618,20 @@ app.get("/warden/:id/leave/:leave_id/:stud_id/info", (req, res) => {
             res.redirect("back");
           } else {
             Student.findById(req.params.stud_id)
-        .populate("leaves")
-        .exec((err, foundStudent) => {
-          if (err) {
-            req.flash("error", "employee not found with this id");
-            res.redirect("back");
-          } else {
-            res.render("Wardenmoreinfostud", {
-              student: foundStudent,
-              leave: leave,
-              warden: wardenFound,
-              moment: moment,
-            });
-          }
-        });
+              .populate("leaves")
+              .exec((err, foundStudent) => {
+                if (err) {
+                  req.flash("error", "employee not found with this id");
+                  res.redirect("back");
+                } else {
+                  res.render("Wardenmoreinfostud", {
+                    student: foundStudent,
+                    leave: leave,
+                    warden: wardenFound,
+                    moment: moment,
+                  });
+                }
+              });
           }
         });
     }
@@ -651,63 +651,81 @@ app.post("/warden/:id/leave/:leave_id/:stud_id/info", (req, res) => {
             req.flash("error", "leave not found with this id");
             res.redirect("back");
           } else {
-      Student.findById(req.params.stud_id)
-        .populate("leaves")
-        .exec((err, foundStudent) => {
-          if (err) {
-            req.flash("error", "student not found with this id");
-            res.redirect("back");
-          } else {
-            if (req.body.action === "Approve") {
-              foundStudent.leaves.forEach(function (leave) {
-                if (leave.wardenstatus === "pending") {
-                  leave.wardenstatus = "approved";
-                  leave.finalstatus = "approved";
-                  leave.status = "approved";
-                  leave.approved = true;
-                  leave.save();
+            Student.findById(req.params.stud_id)
+              .populate("leaves")
+              .exec((err, foundStudent) => {
+                if (err) {
+                  req.flash("error", "student not found with this id");
+                  res.redirect("back");
+                } else {
+                  if (req.body.action === "Approve") {
+                    foundStudent.leaves.forEach(function (leave) {
+                      if (leave.wardenstatus === "pending") {
+                        leave.wardenstatus = "approved";
+                        leave.finalstatus = "approved";
+                        leave.status = "approved";
+                        leave.approved = true;
+                        leave.save();
+                      }
+                    });
+                  } else {
+                    console.log("u denied");
+                    foundStudent.leaves.forEach(function (leave) {
+                      if (leave.wardenstatus === "pending") {
+                        leave.wardenstatus = "denied";
+                        leave.finalstatus = "denied";
+                        leave.status = "denied";
+                        leave.denied = true;
+                        leave.save();
+                      }
+                    });
+                  }
+                  res.render("Wardenmoreinfostud", {
+                    student: foundStudent,
+                    warden: wardenFound,
+                    leave: leave,
+                    moment: moment,
+                  });
                 }
               });
-            } else {
-              console.log("u denied");
-              foundStudent.leaves.forEach(function (leave) {
-                if (leave.wardenstatus === "pending") {
-                  leave.wardenstatus = "denied";
-                  leave.finalstatus = "denied";
-                  leave.status = "denied";
-                  leave.denied = true;
-                  leave.save();
-                }
-              });
-            }
-            res.render("Wardenmoreinfostud", {
-              student: foundStudent,
-              warden: wardenFound,
-              leave: leave,
-              moment: moment,
-            });
           }
         });
-      }
-    });
     }
   });
 });
 
-app.get("/warden/:id/timeTable", (req,res) => {
+app.get("/warden/:id/timeTable", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
       req.flash("error", "warden not found with requested id");
       res.redirect("back");
     } else {
-      console.log(timeTable);
-  res.render("timeTable", {
-    warden: wardenFound,
-    timeTable : timeTable
+      // console.log(TimeTable);
+      timeTable
+        .findOne({ ID: "1" })
+        .then((tt) => {
+          console.log("hello");
+          console.log(tt);
+          res.render("timeTable", {
+            warden: wardenFound,
+            tt: tt,
+          });
+        })
+        .catch((error) => console.log(error));
+      // TimeTable.find({}).exec((err,timeTable)=>{
+      //   if (err) {
+      //     req.flash("error", "some error occured");
+      //     res.redirect("back");
+      //   } else {
+      //     console.log(timeTable);
+      //     res.render("timeTable", {
+      //       warden: wardenFound,
+      //       timeTable : timeTable
+      //     });
+      //   }
+      // });
+    }
   });
-}
-  });
-
 });
 
 app.get("/warden/:id/manageSalary", (req, res) => {
@@ -717,153 +735,264 @@ app.get("/warden/:id/manageSalary", (req, res) => {
       res.redirect("back");
     } else {
       // console.log(wardenFound);
-      Student.find({ hostel: wardenFound.hostel })
-        .exec((err, students) => {
-          if (err) {
-            req.flash("error", "student not found with your department");
-            res.redirect("back");
-          } else {
-            res.render("manageSalary", {
-              warden: wardenFound,
-              students: students,
+      Student.find({ hostel: wardenFound.hostel }).exec((err, students) => {
+        if (err) {
+          req.flash("error", "student not found with your department");
+          res.redirect("back");
+        } else {
+          res.render("manageSalary", {
+            warden: wardenFound,
+            students: students,
 
-              moment: moment,
-            });
-          }
-        });
+            moment: moment,
+          });
+        }
+      });
     }
   });
 });
 
-app.post("/warden/:id/saveSalary", (req,res)=>{
+app.post("/warden/:id/saveSalary", (req, res) => {
+  var salaryArray = req.body.salary;
+  // var studentUsernameArray = [];
+  console.log(salaryArray);
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
       req.flash("error", "warden not found with requested id");
       res.redirect("back");
     } else {
-      // console.log(wardenFound);
-      Student.find({ hostel: wardenFound.hostel })
-        .exec((err, students) => {
-          if (err) {
-            req.flash("error", "student not found with your department");
-            res.redirect("back");
-          } else {
-            students.forEach(function(student){
-              console.log("Hello");
-            });
-            res.render("manageSalary", {
-              warden: wardenFound,
-              students: students,
+  Student.find({ hostel: wardenFound.found }).exec((err, students) => {
+    // console.log(students);
+    if (err) {
+      req.flash("error", "student not found with your department");
+      res.redirect("back");
+    } else {
+      var i = 0;
 
-              moment: moment,
-            });
-          }
-        });
+      students.forEach(function (student) {
+        console.log("Hello");
+        console.log(student.username);
+        student.salary = salaryArray[i];
+        student.save();
+        // studentUsernameArray.push(student.username);
+        i++;
+
+      });
+      res.render("manageSalary", {
+        warden: wardenFound,
+        students: students,
+
+        moment: moment,
+      });
+    }
+  });
+}
+});
+        // student.update({"hostel":"Security"},{$set:{"salary":salaryArray[i]}},{multi:true});
+        // student.save();
+        // student.salary = salaryArray[i];
+        // student.update(
+        //   {},
+        //   {
+        //     $set: {
+        //       salary : salaryArray[i]
+        //     },
+        //   }
+        // );
+
+    ///////////////////////////////////
+    // console.log("usernames : ", studentUsernameArray);
+
+    // var size = studentUsernameArray.length;
+    // console.log("sizze :", size);
+
+    // for (let j = 0; j < size; j++) {
+    //   console.log(studentUsernameArray[j]);
+    //   console.log(salaryArray[j]);
+    //   Student.updateOne(
+    //     { "username": studentUsernameArray[j] },
+    //     { $set: { "salary": salaryArray[j] } },
+    //     { multi: true }
+    //   );
+    // }
+
+
+    /////////////////////////////
+
+  Student.find({ hostel: "Security" }).exec((err, students) => {
+    if (err) {
+      req.flash("error", "student not found with your department");
+      res.redirect("back");
+    } else {
+      students.forEach(function (student) {
+        console.log(student.salary);
+      });
+
+      res.render("manageSalary", {
+        // warden: wardenFound,
+        students: students,
+
+        moment: moment,
+      });
     }
   });
 });
 
 app.get("/warden/:id/calculateMonthlySalary", (req, res) => {
-
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
       req.flash("error", "warden not found with requested id");
       res.redirect("back");
     } else {
       // console.log(wardenFound);
-      Student.find({ hostel: wardenFound.hostel })
-        .exec((err, students) => {
-          if (err) {
-            req.flash("error", "student not found with your department");
-            res.redirect("back");
-          } else {
+      Student.find({ hostel: wardenFound.hostel }).exec((err, students) => {
+        if (err) {
+          req.flash("error", "student not found with your department");
+          res.redirect("back");
+        } else {
+          // students.forEach(function(student){
+          //   console.log("Hello");
+          // });
+          res.render("entermonth", {
+            warden: wardenFound,
+            students: students,
 
-            // students.forEach(function(student){
-            //   console.log("Hello");
-            // });
-            res.render("entermonth", {
-              warden: wardenFound,
-              students: students,
-
-              moment: moment,
-            });
-          }
-        });
+            moment: moment,
+          });
+        }
+      });
     }
   });
 });
 app.post("/warden/:id/calculateMonthlySalary", (req, res) => {
   console.log(req.body.month);
-  var monthNo=req.body.month;
-      Student.find({},function(err,data){
-        var students=data;
-        // console.log(students);
-        Leave.find({},function(err,leavedata){
-          var leavedata= leavedata;
-          // console.log(leavedata);
-          res.render("calculatemonthlysalary",{students:students,monthNo:monthNo,leavedata:leavedata});
-        });
-        
+  var monthNo = req.body.month;
+  Student.find({}, function (err, data) {
+    var students = data;
+    // console.log(students);
+    Leave.find({}, function (err, leavedata) {
+      var leavedata = leavedata;
+      // console.log(leavedata);
+      res.render("calculatemonthlysalary", {
+        students: students,
+        monthNo: monthNo,
+        leavedata: leavedata,
       });
-       
+    });
+  });
 });
 
 app.post("/editTimeTable", (req, res) => {
   console.log(req.body.shift1_1);
-  timeTable.updateMany(
-    {}, //match all
-    {
-      $set: {
-        shift1_1: req.body.shift1_1,
-        shift2_1: req.body.shift2_1,
-        shift3_1: req.body.shift3_1,
-        shift1_2: req.body.shift1_2,
-        shift2_2: req.body.shift2_1,
-        shift3_2: req.body.shift3_1,
-        shift1_3: req.body.shift1_3,
-        shift2_3: req.body.shift2_3,
-        shift3_3: req.body.shift3_3,
-        shift1_4: req.body.shift1_4,
-        shift2_4: req.body.shift2_4,
-        shift3_4: req.body.shift3_4,
-        shift1_5: req.body.shift1_5,
-        shift2_5: req.body.shift2_5,
-        shift3_5: req.body.shift3_5,
-      },
-    },
-    {
-      multi: true,
-    }
-  );
-  res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable");
-  //   timeTable.findAndUpdate({ "ID" : "1"},
-  //   {"shift1_1": req.body.shift1_1,
-  //   "shift2_1": req.body.shift2_1,
-  //   "shift3_1": req.body.shift3_1,
-  //   "shift1_2": req.body.shift1_2,
-  //   "shift2_2": req.body.shift2_1,
-  //   "shift3_2": req.body.shift3_1,
-  //   "shift1_3": req.body.shift1_3,
-  //   "shift2_3": req.body.shift2_3,
-  //   "shift3_3": req.body.shift3_3,
-  //   "shift1_4": req.body.shift1_4,
-  //   "shift2_4": req.body.shift2_4,
-  //   "shift3_4": req.body.shift3_4,
-  //   "shift1_5": req.body.shift1_5,
-  //   "shift2_5": req.body.shift2_5,
-  //   "shift3_5": req.body.shift3_5
-  // },
-  //     function(err, result){
 
-  //     if(err){
-  //         res.send(err)
-  //     }
-  //     else{
-  //         res.redirect("/warden/62223f9190e9493a2819e287/timeTable");
-  //     }
+  timeTable
+    .findOneAndUpdate({ _id: "622dae1bd5de8435413ba367" }, { $set: req.body })
+    .then((newtt) => res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable"))
+    .catch((error) => console.log(error));
+  // fromdate = new Date(req.body.from_tt);
+  // todate = new Date(req.body.to_tt);
+  // year = fromdate.getFullYear();
+  // month = fromdate.getMonth() + 1;
+  // dt = fromdate.getDate();
+  // todt = todate.getDate();
+  // if (dt < 10) {
+  //   dt = "0" + dt;
+  // }
+  // if (month < 10) {
+  //   month = "0" + month;
+  // }
+  // TimeTable.create((err, newtt) => {
+  //   if (err) {
+  //     req.flash("error", "Something went wrong");
+  //     res.redirect("back");
+  //     console.log(err);
+  //   } else {
 
-  // })
+  //     newtt.shift1_1 = req.body.shift1_1;
+  //     newtt.shift2_1 = req.body.shift2_1;
+  //     newtt.shift3_1 = req.body.shift3_1;
+  //     newtt.shift1_2 = req.body.shift1_2;
+  //     newtt.shift2_2 = req.body.shift2_2;
+  //     newtt.shift3_2 = req.body.shift3_2;
+  //     newtt.shift1_3 = req.body.shift1_3;
+  //     newtt.shift2_3 = req.body.shift2_3;
+  //     newtt.shift3_3 = req.body.shift3_3;
+  //     newtt.shift1_4 = req.body.shift1_4;
+  //     newtt.shift2_4 = req.body.shift2_4;
+  //     newtt.shift3_4 = req.body.shift3_4;
+  //     newtt.shift1_5 = req.body.shift1_5;
+  //     newtt.shift2_5 = req.body.shift2_5;
+  //     newtt.shift3_5 = req.body.shift3_5;
+  //     newtt.from = req.body.from_tt;
+  //     newtt.to = req.body.to_tt;
+
+  //     newtt.save();
+
+  //     res.render("timeTable", { timeTable : newtt });
+  //   }
+  // });
+  // TimeTable.find({}).exec((err,tt)=> {
+  //   var timeTable = tt;
+  //   if (err) {
+  //     req.flash("error", "leave not found with this id");
+  //     res.redirect("back");
+  //   } else{
+  //     timeTable.shifts.updateMany(
+  //       {}, //match all
+  //       {
+  //         $set: {
+  //           shift1_1: req.body.shift1_1,
+  //           shift2_1: req.body.shift2_1,
+  //           shift3_1: req.body.shift3_1,
+  //           shift1_2: req.body.shift1_2,
+  //           shift2_2: req.body.shift2_1,
+  //           shift3_2: req.body.shift3_1,
+  //           shift1_3: req.body.shift1_3,
+  //           shift2_3: req.body.shift2_3,
+  //           shift3_3: req.body.shift3_3,
+  //           shift1_4: req.body.shift1_4,
+  //           shift2_4: req.body.shift2_4,
+  //           shift3_4: req.body.shift3_4,
+  //           shift1_5: req.body.shift1_5,
+  //           shift2_5: req.body.shift2_5,
+  //           shift3_5: req.body.shift3_5,
+  //         },
+  //       },
+  //       {
+  //         multi: true,
+  //       }
+  //     );
+  //   res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable");
+  // }
 });
+
+//   timeTable.findAndUpdate({ "ID" : "1"},
+//   {"shift1_1": req.body.shift1_1,
+//   "shift2_1": req.body.shift2_1,
+//   "shift3_1": req.body.shift3_1,
+//   "shift1_2": req.body.shift1_2,
+//   "shift2_2": req.body.shift2_1,
+//   "shift3_2": req.body.shift3_1,
+//   "shift1_3": req.body.shift1_3,
+//   "shift2_3": req.body.shift2_3,
+//   "shift3_3": req.body.shift3_3,
+//   "shift1_4": req.body.shift1_4,
+//   "shift2_4": req.body.shift2_4,
+//   "shift3_4": req.body.shift3_4,
+//   "shift1_5": req.body.shift1_5,
+//   "shift2_5": req.body.shift2_5,
+//   "shift3_5": req.body.shift3_5
+// },
+//     function(err, result){
+
+//     if(err){
+//         res.send(err)
+//     }
+//     else{
+//         res.redirect("/warden/62223f9190e9493a2819e287/timeTable");
+//     }
+
+// });
 
 //logout for student
 
