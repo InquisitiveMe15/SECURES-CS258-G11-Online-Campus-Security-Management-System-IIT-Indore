@@ -1,10 +1,15 @@
 <% include ./partial/header %>
-<% include ./partial/wardenfunction%>
 
 
-<div class="col-sm-6" style="flex: 0 0 50%; max-width: 50%; margin-left: 431px;
-margin-top: -251px; text-align: -webkit-center;">
+
+<div  style="flex: 0 0 50%;  margin: auto;
+margin-top: 50px; text-align: -webkit-center;">
   <form action="/editTimeTable" method="post" name="formTimeTable">
+    <%var today = new Date()%>
+    <%console.log(today)%>
+<input type="date" id="from" name="from" value="<%=today%>">
+<input type="date" id="to" name="to" value="<%=today.getDate()+7%>">
+
     <table>
       <tr>
         <td></td>
@@ -14,7 +19,7 @@ margin-top: -251px; text-align: -webkit-center;">
       </tr>
       <tr>
         <td>Place 1</td>
-        <td><input type="text" id="shift1_1" name="shift1_1"  value="Name" readonly /></td>
+        <td><input type="text" id="shift1_1" name="shift1_1"  value="" readonly /></td>
         <td><input type="text" id="shift2_1" name="shift2_1" value="Name" readonly /></td>
         <td><input type="text" id="shift3_1" name="shift3_1" value="Name" readonly /></td>
       </tr>
@@ -54,7 +59,12 @@ margin-top: -251px; text-align: -webkit-center;">
     <input type="button" id="save" onclick="saveData()" value="Save" />
     <input type="submit" id="confirm" value="Confirm" />
   </form>
+  <div style="text-align:center; margin-top: 10px;">
+          
+    <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+  </div>
 </div>
+
 
   <script>
 
@@ -68,26 +78,26 @@ margin-top: -251px; text-align: -webkit-center;">
     }
 
     function saveData() {
-      var data = {};
-      data.shift1_1 = document.getElementById("shift1_1").value;
-      data.shift2_1 = document.getElementById("shift2_1").value;
-      data.shift3_1 = document.getElementById("shift3_1").value;
+      // var data = {};
+      // data.shift1_1 = document.getElementById("shift1_1").value;
+      // data.shift2_1 = document.getElementById("shift2_1").value;
+      // data.shift3_1 = document.getElementById("shift3_1").value;
 
-      data.shift1_2 = document.getElementById("shift1_2").value;
-      data.shift2_2 = document.getElementById("shift2_2").value;
-      data.shift3_2 = document.getElementById("shift3_2").value;
+      // data.shift1_2 = document.getElementById("shift1_2").value;
+      // data.shift2_2 = document.getElementById("shift2_2").value;
+      // data.shift3_2 = document.getElementById("shift3_2").value;
 
-      data.shift1_3 = document.getElementById("shift1_3").value;
-      data.shift2_3 = document.getElementById("shift2_3").value;
-      data.shift3_3 = document.getElementById("shift3_3").value;
+      // data.shift1_3 = document.getElementById("shift1_3").value;
+      // data.shift2_3 = document.getElementById("shift2_3").value;
+      // data.shift3_3 = document.getElementById("shift3_3").value;
 
-      data.shift1_4 = document.getElementById("shift3_3").value;
-      data.shift2_4 = document.getElementById("shift3_3").value;
-      data.shift3_4 = document.getElementById("shift3_3").value;
+      // data.shift1_4 = document.getElementById("shift3_3").value;
+      // data.shift2_4 = document.getElementById("shift3_3").value;
+      // data.shift3_4 = document.getElementById("shift3_3").value;
 
-      data.shift1_5 = document.getElementById("shift3_3").value;
-      data.shift2_5 = document.getElementById("shift3_3").value;
-      data.shift3_5 = document.getElementById("shift3_3").value;
+      // data.shift1_5 = document.getElementById("shift3_3").value;
+      // data.shift2_5 = document.getElementById("shift3_3").value;
+      // data.shift3_5 = document.getElementById("shift3_3").value;
 
      
 

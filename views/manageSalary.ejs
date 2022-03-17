@@ -1,4 +1,5 @@
 <% include ./partial/header %>
+<form action="/warden/6228f7ce3b00b39f6c88cd36/saveSalary" method="POST" id="savesalary>
     <div class="container">
         <table class="content-table"
             style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
@@ -52,7 +53,13 @@
 
 
         </table>
+       
+        <div style="text-align: center;">
+        <button type="submit" class="btn btn-success btn-sm" style="width: 100px; margin-top: 40px">Save</button>
     </div>
+    
+    </div>
+</form>
 
     <div style="text-align:center">
         <a href="#" class="btn btn-danger btn-sm" style="width: 100px; margin-top: 40px" name="editsalary"
@@ -64,11 +71,11 @@
     <!-- <div style="text-align: center;">
             <a href="#" class="btn btn-success btn-sm" style="width: 100px; margin-top: 40px" onclick="savedata()">Save</a>
     </div> -->
-    <form action="/warden/6228f7ce3b00b39f6c88cd36/saveSalary" method="post" id="savesalary">
+    <!-- <form action="/warden/6228f7ce3b00b39f6c88cd36/saveSalary" method="post" id="savesalary">
     <div style="text-align: center;">
         <button type="submit" class="btn btn-success btn-sm" style="width: 100px; margin-top: 40px">Save</button>
     </div>
-</form>
+</form> -->
 
     <script>
         function editsalary() {
@@ -79,26 +86,18 @@
             document.getElementById("confirmsalary").style.display = "inline-block";
 
         }
-        var salary = [];
+        // var salary = [];
         function confirmdata() {
             var fields = document.querySelectorAll("table input[type='text']");
             for (var i = 0; i < fields.length; i++) {
-                salary.push(fields[i].value);
+                // salary.push(fields[i].value);
                 fields[i].readOnly = true;
             }
-            console.log(salary[0],salary[1]);
+            // console.log(salary[0],salary[1]);
             document.getElementById("confirmsalary").style.display = "none";
             // document.getElementById("savesalary").style.display = "inline-block";
 
         }
-        // function savedata(){
-        //     console.log("hello");
-        //     var i = 0;
-        //     students.forEach(function(student){
-        //         student.salary = salary[i];
-        //         i++;
-        //     })
-        // }
-
+        
     </script>
     <% include ./partial/footer %>
