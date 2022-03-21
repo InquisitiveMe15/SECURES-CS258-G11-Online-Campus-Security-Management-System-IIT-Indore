@@ -11,7 +11,7 @@ var express = require("express"),
   flash = require("connect-flash"),
   Student = require("./models/student"),
   Warden = require("./models/warden"),
-  timeTable = require("./models/TimeTable"),
+  timeTable = require("./models/timeTable"),
   // Hod = require("./models/hod"),
   Leave = require("./models/leave");
 
