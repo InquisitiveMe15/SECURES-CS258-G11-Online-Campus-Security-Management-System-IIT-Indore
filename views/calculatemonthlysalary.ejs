@@ -4,7 +4,7 @@
         <br>
         <br>
         <% var monthName=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"] %>
-        <h1> MONTH NO. <%= monthNo-1 %></h1>
+        <h1> MONTH NO. <%= monthNo %></h1>
         <h1> MONTH: <%= monthName[monthNo-1] %></h1>
         <h3> Reserved Holidays : 2 Days %></h3>
         <table class="content-table"
@@ -47,9 +47,12 @@
                     <td>
                         <%=student.phonenumber%>
                     </td>
-                    <td><input type="text" id="salary" name="salary"
+                    <td>
+                        <%=student.salary%>
+                    </td>
+                    <!-- <td><input type="text" id="salary" name="salary"
                             style="border: 2px solid black; border-radius: 8px; text-align: center;"
-                            value="<%=student.salary%>" readonly></input></td>
+                            value="<%=student.salary%>" readonly></input></td> -->
                    
                     </td>
                     <% console.log(student.username)%>
@@ -91,6 +94,10 @@
         </table>
     </div>
 
+    <div style="text-align:center; margin-top: 10px;">
+          
+        <a href="/warden/mail" class="btn btn-primary btn-danger" style="width: 100px; margin-top: 40px">Mail it</a>
+      </div>
     <div style="text-align:center; margin-top: 10px;">
           
         <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>

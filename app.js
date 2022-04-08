@@ -17,6 +17,7 @@ var express = require("express"),
 
 var moment = require("moment");
 const { ObjectId } = require("mongoose");
+var nodemailer = require('nodemailer');
 
 // var url =process.env.DATABASEURL|| "mongodb://localhost/LeaveApp";
 var url =
@@ -101,6 +102,59 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
+
+
+///////////////////////////////////////////////////////
+app.get('/warden/mail', (req,res)=>{
+
+
+var mailList = [];
+Student.find({}, (err, allUsers)=>{
+  if(err){
+      console.log(err);
+  }
+  allUsers.forEach(function(users){
+      mailList.push(users.emailid);
+      // return mailList;
+  });
+});
+
+
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'cs258g11@gmail.com',
+      pass: 'weareg11team@cs258'
+    }
+  });
+  
+  var mailOptions = {
+    from: 'cs258g11@gmail.com',
+    to: mailList,
+    subject: 'Salary Credited !!',
+    text: 'Your salary for this month is credited to your bank account. Please verify and inform within two days in case of any discrepancy.'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+  Warden.find({}, (err, hod) => {
+    if (err) {
+      console.log("err");
+    } else {
+      res.redirect('/warden/home');
+        
+    }
+  });
+});
+
+  ////////////////////////////////////////////////////////
+
+  
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -778,16 +832,40 @@ app.post("/warden/:id/saveSalary", (req, res) => {
         i++;
 
       });
-      res.render("manageSalary", {
-        warden: wardenFound,
-        students: students,
-
-        moment: moment,
-      });
     }
+
+      Student.find({ hostel: "Security" }).exec((err, students) => {
+        if (err) {
+          req.flash("error", "student not found with your department");
+          res.redirect("back");
+        } else {
+          students.forEach(function (student) {
+            console.log(student.salary);
+          });
+      
+          res.render("manageSalary", {
+            // warden: wardenFound,
+            students: students,
+      
+            moment: moment,
+          });
+        }
+      });
+
+
+      // res.render("manageSalary", {
+      //   warden: wardenFound,
+      //   students: students,
+
+      //   moment: moment,
+      // });
+    
   });
 }
 });
+
+});
+// });
         // student.update({"hostel":"Security"},{$set:{"salary":salaryArray[i]}},{multi:true});
         // student.save();
         // student.salary = salaryArray[i];
@@ -819,24 +897,7 @@ app.post("/warden/:id/saveSalary", (req, res) => {
 
     /////////////////////////////
 
-  Student.find({ hostel: "Security" }).exec((err, students) => {
-    if (err) {
-      req.flash("error", "student not found with your department");
-      res.redirect("back");
-    } else {
-      students.forEach(function (student) {
-        console.log(student.salary);
-      });
-
-      res.render("manageSalary", {
-        // warden: wardenFound,
-        students: students,
-
-        moment: moment,
-      });
-    }
-  });
-});
+////////////////////////////////
 
 app.get("/warden/:id/calculateMonthlySalary", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
@@ -881,6 +942,8 @@ app.post("/warden/:id/calculateMonthlySalary", (req, res) => {
     });
   });
 });
+
+
 
 app.post("/editTimeTable", (req, res) => {
   console.log(req.body.shift1_1);
@@ -931,6 +994,7 @@ app.post("/editTimeTable", (req, res) => {
   //     res.render("timeTable", { timeTable : newtt });
   //   }
   // });
+  
   // TimeTable.find({}).exec((err,tt)=> {
   //   var timeTable = tt;
   //   if (err) {
