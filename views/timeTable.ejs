@@ -1,0 +1,77 @@
+<% include ./partial/header %>
+
+
+
+<div  style="flex: 0 0 50%;  margin: auto;
+margin-top: 50px; text-align: -webkit-center;">
+
+  <div style="text-align:center; margin-top: 10px;">
+
+    <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+  </div>
+</div>
+
+
+  <script>
+
+    function editData() {
+      var fields = document.querySelectorAll("table input[type='text']");
+      for (var i = 0; i < fields.length; i++) {
+        fields[i].readOnly = false;
+      }
+      document.getElementById("save").style.display = "inline-block";
+      document.getElementById("confirm").style.display = "inline-block";
+    }
+
+    function saveData() {
+      // var data = {};
+      // data.shift1_1 = document.getElementById("shift1_1").value;
+      // data.shift2_1 = document.getElementById("shift2_1").value;
+      // data.shift3_1 = document.getElementById("shift3_1").value;
+
+      // data.shift1_2 = document.getElementById("shift1_2").value;
+      // data.shift2_2 = document.getElementById("shift2_2").value;
+      // data.shift3_2 = document.getElementById("shift3_2").value;
+
+      // data.shift1_3 = document.getElementById("shift1_3").value;
+      // data.shift2_3 = document.getElementById("shift2_3").value;
+      // data.shift3_3 = document.getElementById("shift3_3").value;
+
+      // data.shift1_4 = document.getElementById("shift3_3").value;
+      // data.shift2_4 = document.getElementById("shift3_3").value;
+      // data.shift3_4 = document.getElementById("shift3_3").value;
+
+      // data.shift1_5 = document.getElementById("shift3_3").value;
+      // data.shift2_5 = document.getElementById("shift3_3").value;
+      // data.shift3_5 = document.getElementById("shift3_3").value;
+
+
+
+      // timeTable.shift1_1 = data.shift1_1;
+      // timeTable.shift2_1 = data.shift2_1;
+      // timeTable.shift3_1 = data.shift3_1;
+      // timeTable.shift1_2 = data.shift1_2;
+      // timeTable.shift2_2 = data.shift2_2;
+      // timeTable.shift3_2 = data.shift3_2;
+      // timeTable.shift1_3 = data.shift1_3;
+      // timeTable.shift2_3 = data.shift2_3;
+      // timeTable.shift3_3 = data.shift3_3;
+      // timeTable.shift1_4 = data.shift1_4;
+      // timeTable.shift2_4 = data.shift2_4;
+      // timeTable.shift3_4 = data.shift3_4;
+      // timeTable.shift1_5 = data.shift1_5;
+      // timeTable.shift2_5 = data.shift2_5;
+      // timeTable.shift3_5 = data.shift3_5;
+
+      // window.localStorage.formData = JSON.stringify(data);
+      document.getElementById("save").style.display = "none";
+      var fields = document.querySelectorAll("table input[type='text']");
+      for (var i = 0; i < fields.length; i++) {
+        fields[i].readOnly = true;
+      }
+    }
+  </script>
+
+
+
+  <% include ./partial/footer %>

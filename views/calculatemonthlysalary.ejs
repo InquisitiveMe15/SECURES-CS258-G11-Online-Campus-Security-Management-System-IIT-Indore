@@ -1,0 +1,105 @@
+<% include ./partial/header %>
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <% var monthName=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"] %>
+        <h1> MONTH NO. <%= monthNo %></h1>
+        <h1> MONTH: <%= monthName[monthNo-1] %></h1>
+        <h3> Reserved Holidays : 2 Days %></h3>
+        <table class="content-table"
+            style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
+            <tr
+                style="background-color: rgb(9, 1, 19); border-radius: 5px 5px 0 0;overflow: hidden;  color: #ffffff;text-align: left; font-weight: bold;">
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Email ID
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th>Salary</th>
+                <th>
+                    No. of leaves in this month
+                </th>
+                <th>
+                    Receivable Monthly Salary
+                </th>
+
+            </tr>
+
+            <%students.forEach(function(student){%>
+                <tr>
+                    <td>
+                        <%=student.name%>
+                    </td>
+                    <td>
+                        <%=student.hostel%>
+                    </td>
+                    <td>
+                        <%=student.emailid%>
+                    </td>
+                    <td>
+                        <%=student.phonenumber%>
+                    </td>
+                    <td>
+                        <%=student.salary%>
+                    </td>
+                    <!-- <td><input type="text" id="salary" name="salary"
+                            style="border: 2px solid black; border-radius: 8px; text-align: center;"
+                            value="<%=student.salary%>" readonly></input></td> -->
+                   
+                    </td>
+                    <% console.log(student.username)%>
+                    <% var month=[0,0,0,0,0,0,0,0,0,0,0,0] %>
+
+                    <%leavedata.forEach(function(leave){%>
+                      
+                        <%if(leave.stud.username === student.username){%>
+                      <%if(leave.wardenstatus==="approved"){%>
+                        <%console.log(leave.from.getMonth())%>
+                        <%month[leave.from.getMonth()]+=leave.days %>
+                          <%}%>
+                          <%}%>
+                      <%})%>
+                      <!-- <% console.log(month) %> -->
+
+                      <%if(month[monthNo-1]>2){%>
+                        <% var thismonthsalary=student.salary-((month[monthNo-1]-2)*500) %>
+                        <%}%>
+                      <%if(month[monthNo-1]<=2){%>
+                        <% var thismonthsalary=student.salary%>
+                        <%}%>
+
+                        
+                        
+                        <% console.log((month[monthNo-1]*500)) %>
+                <td>
+                    <%= month[monthNo-1] %>
+                </td>
+                <td>
+                    <%= thismonthsalary %>
+                </td>
+
+                </tr>
+                <% }) %>
+
+
+
+        </table>
+    </div>
+
+    <div style="text-align:center; margin-top: 10px;">
+          
+        <a href="/warden/mail" class="btn btn-primary btn-danger" style="width: 100px; margin-top: 40px">Mail it</a>
+      </div>
+    <div style="text-align:center; margin-top: 10px;">
+          
+        <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+      </div>
+    <% include ./partial/footer %>

@@ -1,0 +1,68 @@
+<% include ./partial/header %>
+<div
+  
+  style="    flex: 0 0 50%;
+    max-width: 70%;
+    margin: auto;
+    padding: 1%;
+    margin-top: 50px; text-align: -webkit-center;"
+>
+  <table
+    class="content-table"
+    style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);"
+  >
+    <tr
+      style="background-color: rgb(9, 1, 19); border-radius: 5px 5px 0 0;overflow: hidden;  color: #ffffff;text-align: left; font-weight: bold;"
+    >
+      <th>
+        Student Name
+      </th>
+      <th>
+        Email Id
+      </th>
+      <th>
+        Phone Number
+      </th>
+     
+      <th>
+        From
+      </th>
+      <th>To</th>
+      <th>Days</th>
+      <th>Status</th>
+      
+      <!-- <th></th> -->
+      
+      </tr>
+
+      <%leaves.forEach(function(leave){%> 
+      </tr>
+    
+      <td><%=leave.stud.name%></td>
+      <td><%=leave.stud.emailid%></td>
+      <td><%=leave.stud.phonenumber%></td>
+     
+   
+      <td><%=moment(leave.from).format('DD/MM/YYYY')%></td>
+      <td><%=moment(leave.to).format('DD/MM/YYYY')%></td>
+      <td><%=leave.days%></td>
+      <td><%=leave.wardenstatus%></td>
+
+      <%if(leave.wardenstatus==="pending"){%>
+      <td>
+        <a
+          href="/warden/<%=warden.id%>/leave/<%=leave._id%>/<%=leave.stud.id%>/info"
+          class="btn btn-block btn-success"
+          >more info</a
+        >
+      </td>
+      <%}%>
+    </tr>
+       <%})%>
+  </table>
+  <div style="text-align:center; margin-top: 10px;">
+          
+    <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+  </div>
+</div>
+<% include ./partial/footer %>

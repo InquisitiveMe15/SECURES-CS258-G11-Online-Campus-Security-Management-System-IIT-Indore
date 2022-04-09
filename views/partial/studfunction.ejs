@@ -1,0 +1,73 @@
+<script>
+  $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+<h1 style="margin-top: 61px; font-size: 20px;">Welcome, <%=student.name%></h1>
+<div class="container">
+  <div
+    class="row"
+    style="   margin-left: -36px;
+  margin-right: 899px;"
+  >
+    <div class="col-sm-3" style="list-style-type: none;">
+      <li>
+        <a
+          href="/student/home"
+          data-toggle="tooltip"
+          title="Click to see your profile"
+          data-placement="left"
+          class="btn btn-primary btn-lg"
+          style="width: 210px;margin-top: 10px;"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          href="/student/<%=student._id%>"
+          data-toggle="tooltip"
+          title="Click to see your profile"
+          data-placement="left"
+          class="btn btn-success btn-lg"
+          style="width: 210px;margin-top: 10px;"
+          >Profile</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1neHS1x5vhPGVqN0vr9nahV4RPyQzU-sHElURpu1UtSo/edit?usp=sharing"
+          data-toggle="tooltip"
+          title="Click to view the timetable"
+          data-placement="left"
+          class="btn btn-warning btn-lg"
+          style="width: 210px;margin-top: 10px;"
+          >Time Table</a
+        >
+      </li>
+      <li>
+        <a
+          href="/student/<%=student._id%>/apply"
+          class="btn btn-danger btn-lg"
+          style="width: 210px;margin-top: 10px;"
+          >Apply For Leave</a
+        >
+      </li>
+      <li>
+        <a
+          href="/student/<%=student._id%>/track"
+          class="btn btn-info btn-lg"
+          style="width: 210px;margin-top: 10px;"
+          >Track Leave</a
+        >
+      </li>
+      <li>
+        <a
+          href="/student/<%=student._id%>/monthlyleaves"
+          class="btn btn-success btn-lg"
+          style="width: 210px;margin-top: 10px;"
+          >Monthly Leaves</a
+        >
+      </li>
+    </div>
+  </div>
+</div>
