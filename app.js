@@ -782,6 +782,11 @@ app.get("/warden/:id/timeTable", (req, res) => {
   });
 });
 
+
+app.get("/warden/<%=warden._id%>/extraemployee", (req, res) => {
+  res.render("extraemployee");
+});
+
 app.get("/warden/:id/manageSalary", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
