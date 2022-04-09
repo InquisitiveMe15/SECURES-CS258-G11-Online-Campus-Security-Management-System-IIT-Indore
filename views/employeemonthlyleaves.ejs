@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <% include ./partial/header %> <% include ./partial/studfunction %> 
 <div
   class="col-sm-6"
@@ -55,4 +56,63 @@ margin-top: -181px;  text-align: -webkit-center;"
 </div>
 
 <% include
+=======
+<% include ./partial/header %> <% include ./partial/studfunction %> 
+<div
+  class="col-sm-6"
+  style="    flex: 0 0 50%;
+max-width: 60%;
+margin-left: 431px;
+margin-top: -181px;  text-align: -webkit-center;"
+>
+  <% var month=[0,0,0,0,0,0,0,0,0,0,0,0] %>
+  <%student.leaves.forEach(function(leave){%>
+    <%if(leave.wardenstatus==="approved"){%>
+   
+      <%month[leave.from.getMonth()]+=leave.days %>
+        <%}%>
+    <%})%>
+    <div class="container" >
+    <table class="content-table"
+    style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
+        <tr
+      style="background-color: rgb(9, 1, 19); border-radius: 5px 5px 0 0;overflow: hidden;  color: #ffffff;text-align: left; font-weight: bold;"
+      >
+        <th>Jan.</th>
+        <th>Feb.</th>
+        <th>Mar.</th>
+        <th>Apr.</th>
+        <th>May</th>
+        <th>June</th>
+        <th>July</th>
+        <th>Aug.</th>
+        <th>Sep.</th>
+        <th>Oct.</th>
+        <th>Nov.</th>
+        <th>Dec.</th>
+
+      </tr>
+      <tr>
+          <th><%= month[0]%></th>
+          <th><%= month[1]%></th>
+          <th><%= month[2]%></th>
+          <th><%= month[3]%></th>
+          <th><%= month[4]%></th>
+          <th><%= month[5]%></th>
+          <th><%= month[6]%></th>
+          <th><%= month[7]%></th>
+          <th><%= month[8]%></th>
+          <th><%= month[9]%></th>
+          <th><%= month[10]%></th>
+          <th><%= month[11]%></th>
+          <th><%= month[12]%></th>
+      </tr>
+
+    </table>
+ </div>
+</div>
+</div>
+
+<% include
+>>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
 ./partial/footer %>
