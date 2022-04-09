@@ -127,22 +127,14 @@ Student.find({}, (err, allUsers)=>{
       pass: 'weareg11team@cs258'
     }
   });
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
   var mailOptions = {
     from: 'cs258g11@gmail.com',
     to: mailList,
     subject: 'Salary Credited !!',
     text: 'Your salary for this month is credited to your bank account. Please verify and inform within two days in case of any discrepancy.'
   };
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
@@ -155,22 +147,15 @@ Student.find({}, (err, allUsers)=>{
       console.log("err");
     } else {
       res.redirect('/warden/home');
-<<<<<<< HEAD
 
-=======
         
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
     }
   });
 });
 
   ////////////////////////////////////////////////////////
 
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -764,41 +749,6 @@ app.post("/warden/:id/leave/:leave_id/:stud_id/info", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
-// app.get("/warden/:id/timeTable", (req, res) => {
-//   Warden.findById(req.params.id).exec((err, wardenFound) => {
-//     if (err) {
-//       req.flash("error", "warden not found with requested id");
-//       res.redirect("back");
-//     } else {
-//       // console.log(TimeTable);
-//       timeTable
-//         .findOne({ ID: "1" })
-//         .then((tt) => {
-//           console.log("hello");
-//           console.log(tt);
-//           res.render("timeTable", {
-//             warden: wardenFound,
-//             tt: tt,
-//           });
-//         })
-//         .catch((error) => console.log(error));
-//       // TimeTable.find({}).exec((err,timeTable)=>{
-//       //   if (err) {
-//       //     req.flash("error", "some error occured");
-//       //     res.redirect("back");
-//       //   } else {
-//       //     console.log(timeTable);
-//       //     res.render("timeTable", {
-//       //       warden: wardenFound,
-//       //       timeTable : timeTable
-//       //     });
-//       //   }
-//       // });
-//     }
-//   });
-// });
-=======
 app.get("/warden/:id/timeTable", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
@@ -837,7 +787,6 @@ app.get("/warden/:id/timeTable", (req, res) => {
 app.get("/warden/<%=warden._id%>/extraemployee", (req, res) => {
   res.render("extraemployee");
 });
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
 
 app.get("/warden/:id/manageSalary", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
@@ -899,19 +848,11 @@ app.post("/warden/:id/saveSalary", (req, res) => {
           students.forEach(function (student) {
             console.log(student.salary);
           });
-<<<<<<< HEAD
-
-          res.render("manageSalary", {
-            // warden: wardenFound,
-            students: students,
-
-=======
       
           res.render("manageSalary", {
             // warden: wardenFound,
             students: students,
       
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
             moment: moment,
           });
         }
@@ -924,11 +865,7 @@ app.post("/warden/:id/saveSalary", (req, res) => {
 
       //   moment: moment,
       // });
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
   });
 }
 });
@@ -1063,11 +1000,7 @@ app.post("/editTimeTable", (req, res) => {
   //     res.render("timeTable", { timeTable : newtt });
   //   }
   // });
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 6e1fd2b35ade4b7cbeae9b8875956fdee5175b41
   // TimeTable.find({}).exec((err,tt)=> {
   //   var timeTable = tt;
   //   if (err) {
