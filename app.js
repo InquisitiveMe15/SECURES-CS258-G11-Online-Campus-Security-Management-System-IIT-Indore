@@ -147,6 +147,7 @@ Student.find({}, (err, allUsers)=>{
       console.log("err");
     } else {
       res.redirect('/warden/home');
+
         
     }
   });
@@ -791,6 +792,11 @@ app.get("/warden/:id/timeTable", (req, res) => {
       // });
     }
   });
+});
+
+
+app.get("/warden/<%=warden._id%>/extraemployee", (req, res) => {
+  res.render("extraemployee");
 });
 
 app.get("/warden/:id/manageSalary", (req, res) => {
