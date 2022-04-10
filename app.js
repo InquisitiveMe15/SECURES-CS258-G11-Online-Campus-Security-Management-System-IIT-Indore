@@ -576,6 +576,17 @@ app.get("/warden/home", ensureAuthenticated, (req, res) => {
     }
   });
 });
+// app.get("/warden/home", ensureAuthenticated, (req, res) => {
+//   Warden.find({}, (err, hod) => {
+//     if (err) {
+//       console.log("err");
+//     } else {
+//       res.render("homewarden", {
+//         warden: req.user,
+//       });
+//     }
+//   });
+// });
 
 app.get("/warden/:id", ensureAuthenticated, (req, res) => {
   console.log(req.params.id);
@@ -898,6 +909,48 @@ app.post("/warden/:id/saveSalary", (req, res) => {
     /////////////////////////////
 
 ////////////////////////////////
+
+app.get("/student/:id/calculateMonthlySalaryS", (req, res) => {
+  
+    
+      Student.findById(req.params.id).exec((err, students) => {
+        if (err) {
+          req.flash("error", "guard not found ");
+          res.redirect("back");
+        } else {
+          console.log(students);
+          
+          res.render("entermonthS", {
+            
+            students: students,
+
+            moment: moment,
+          });
+        }
+      });
+});
+
+app.post("/student/:id/calculateMonthlySalaryS", (req, res) => {
+  
+      var monthNo = req.body.month;
+      Student.findById(req.params.id).exec((err, students) => {
+        if (err) {
+          req.flash("error", "guard not found ");
+          res.redirect("back");
+        } else {
+          console.log(students);
+          Leave.find({}, function (err, leavedata) {
+            var leavedata = leavedata;
+            // console.log(leavedata);
+            res.render("calculateMonthlySalaryS", {
+              students: students,
+              monthNo: monthNo,
+              leavedata: leavedata,
+            });
+          });
+        }
+      });
+});
 
 app.get("/warden/:id/calculateMonthlySalary", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
