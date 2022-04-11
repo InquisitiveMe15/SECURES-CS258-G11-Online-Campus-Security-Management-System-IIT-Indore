@@ -11,7 +11,9 @@ var express = require("express"),
   flash = require("connect-flash"),
   Student = require("./models/student"),
   Warden = require("./models/warden"),
-  // timeTable = require("./models/TimeTable"),
+  timeTable = require("./models/TimeTable"),
+  Extraemployee = require("./models/extraemployee"),
+
   // Hod = require("./models/hod"),
   Leave = require("./models/leave");
 
@@ -796,9 +798,71 @@ app.post("/warden/:id/leave/:leave_id/:stud_id/info", (req, res) => {
 // });
 
 
-app.get("/warden/<%=warden._id%>/extraemployee", (req, res) => {
-  res.render("extraemployee");
+app.get("/warden/:id/extraemployee", (req, res) => {
+  Warden.findById(req.params.id).exec((err, wardenFound) => {
+    if (err) {
+      req.flash("error", "warden not found with requested id");
+      res.redirect("back");
+    } else {
+      Extraemployee.find().exec((err,employees) => {
+        if (err) {
+          req.flash("error", "employee not found with your department");
+          res.redirect("back");
+        } else {
+          employees.forEach(function (employee) {
+            console.log(employee);
+          });
+      
+          res.render("extraemployee", {
+            warden: wardenFound,
+            employees:employees,
+          });
+        }
+      });
+    }
+  });
 });
+app.post("/warden/:id/extraemployee", (req, res) => {
+  Warden.findById(req.params.id).exec((err, wardenFound) => {
+    if (err) {
+      req.flash("error", "warden not found with requested id");
+      res.redirect("back");
+    } else {
+       console.log(req.body);
+       var name=req.body.name;
+       var emailid=req.body.emailid;
+       var contactno=req.body.contactno;
+      let newemployee=new Extraemployee({name:name,emailid:emailid,contatcno:contactno});
+      // extraemployee.create(newemployee, function(err, res) {
+      //   if (err) {
+      //     console.log("error")
+      //   }else{
+      //   console.log("1 document inserted");
+      //   }
+      // });
+      newemployee.save()
+   .then(doc => {
+     console.log(doc)
+   })
+   .catch(err => {
+     console.error(err)
+   })
+      
+      res.render("extraemployee", {
+        warden: wardenFound,
+        moment: moment,
+      });
+  
+
+    }
+  });
+});
+
+
+app.get("/warden/:id/addextraemployee", (req, res) => {
+  res.render("addextraemployee");
+});
+
 
 app.get("/warden/:id/manageSalary", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
