@@ -13,6 +13,7 @@ var express = require("express"),
   Warden = require("./models/warden"),
   timeTable = require("./models/TimeTable"),
   Extraemployee = require("./models/extraemployee"),
+
   // Hod = require("./models/hod"),
   Leave = require("./models/leave");
 
@@ -578,6 +579,17 @@ app.get("/warden/home", ensureAuthenticated, (req, res) => {
     }
   });
 });
+// app.get("/warden/home", ensureAuthenticated, (req, res) => {
+//   Warden.find({}, (err, hod) => {
+//     if (err) {
+//       console.log("err");
+//     } else {
+//       res.render("homewarden", {
+//         warden: req.user,
+//       });
+//     }
+//   });
+// });
 
 app.get("/warden/:id", ensureAuthenticated, (req, res) => {
   console.log(req.params.id);
@@ -750,39 +762,40 @@ app.post("/warden/:id/leave/:leave_id/:stud_id/info", (req, res) => {
   });
 });
 
-app.get("/warden/:id/timeTable", (req, res) => {
-  Warden.findById(req.params.id).exec((err, wardenFound) => {
-    if (err) {
-      req.flash("error", "warden not found with requested id");
-      res.redirect("back");
-    } else {
-      // console.log(TimeTable);
-      timeTable
-        .findOne({ ID: "1" })
-        .then((tt) => {
-          console.log("hello");
-          console.log(tt);
-          res.render("timeTable", {
-            warden: wardenFound,
-            tt: tt,
-          });
-        })
-        .catch((error) => console.log(error));
-      // TimeTable.find({}).exec((err,timeTable)=>{
-      //   if (err) {
-      //     req.flash("error", "some error occured");
-      //     res.redirect("back");
-      //   } else {
-      //     console.log(timeTable);
-      //     res.render("timeTable", {
-      //       warden: wardenFound,
-      //       timeTable : timeTable
-      //     });
-      //   }
-      // });
-    }
-  });
-});
+// app.get("/warden/:id/timeTable", (req, res) => {
+//   Warden.findById(req.params.id).exec((err, wardenFound) => {
+//     if (err) {
+//       req.flash("error", "warden not found with requested id");
+//       res.redirect("back");
+//     } else {
+//       // console.log(TimeTable);
+//       timeTable
+//         .findOne({ ID: "1" })
+//         .then((tt) => {
+//           console.log("hello");
+//           console.log(tt);
+//           res.render("timeTable", {
+//             warden: wardenFound,
+//             tt: tt,
+//           });
+//         })
+//         .catch((error) => console.log(error));
+
+//       // TimeTable.find({}).exec((err,timeTable)=>{
+//       //   if (err) {
+//       //     req.flash("error", "some error occured");
+//       //     res.redirect("back");
+//       //   } else {
+//       //     console.log(timeTable);
+//       //     res.render("timeTable", {
+//       //       warden: wardenFound,
+//       //       timeTable : timeTable
+//       //     });
+//       //   }
+//       // });
+//     }
+//   });
+// });
 
 
 app.get("/warden/:id/extraemployee", (req, res) => {
@@ -968,6 +981,48 @@ app.post("/warden/:id/saveSalary", (req, res) => {
 
 ////////////////////////////////
 
+app.get("/student/:id/calculateMonthlySalaryS", (req, res) => {
+  
+    
+      Student.findById(req.params.id).exec((err, students) => {
+        if (err) {
+          req.flash("error", "guard not found ");
+          res.redirect("back");
+        } else {
+          console.log(students);
+          
+          res.render("entermonthS", {
+            
+            students: students,
+
+            moment: moment,
+          });
+        }
+      });
+});
+
+app.post("/student/:id/calculateMonthlySalaryS", (req, res) => {
+  
+      var monthNo = req.body.month;
+      Student.findById(req.params.id).exec((err, students) => {
+        if (err) {
+          req.flash("error", "guard not found ");
+          res.redirect("back");
+        } else {
+          console.log(students);
+          Leave.find({}, function (err, leavedata) {
+            var leavedata = leavedata;
+            // console.log(leavedata);
+            res.render("calculateMonthlySalaryS", {
+              students: students,
+              monthNo: monthNo,
+              leavedata: leavedata,
+            });
+          });
+        }
+      });
+});
+
 app.get("/warden/:id/calculateMonthlySalary", (req, res) => {
   Warden.findById(req.params.id).exec((err, wardenFound) => {
     if (err) {
@@ -1014,90 +1069,90 @@ app.post("/warden/:id/calculateMonthlySalary", (req, res) => {
 
 
 
-app.post("/editTimeTable", (req, res) => {
-  console.log(req.body.shift1_1);
+// app.post("/editTimeTable", (req, res) => {
+//   console.log(req.body.shift1_1);
 
-  timeTable
-    .findOneAndUpdate({ _id: "622dae1bd5de8435413ba367" }, { $set: req.body })
-    .then((newtt) => res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable"))
-    .catch((error) => console.log(error));
-  // fromdate = new Date(req.body.from_tt);
-  // todate = new Date(req.body.to_tt);
-  // year = fromdate.getFullYear();
-  // month = fromdate.getMonth() + 1;
-  // dt = fromdate.getDate();
-  // todt = todate.getDate();
-  // if (dt < 10) {
-  //   dt = "0" + dt;
-  // }
-  // if (month < 10) {
-  //   month = "0" + month;
-  // }
-  // TimeTable.create((err, newtt) => {
-  //   if (err) {
-  //     req.flash("error", "Something went wrong");
-  //     res.redirect("back");
-  //     console.log(err);
-  //   } else {
+//   timeTable
+//     .findOneAndUpdate({ _id: "622dae1bd5de8435413ba367" }, { $set: req.body })
+//     .then((newtt) => res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable"))
+//     .catch((error) => console.log(error));
+//   // fromdate = new Date(req.body.from_tt);
+//   // todate = new Date(req.body.to_tt);
+//   // year = fromdate.getFullYear();
+//   // month = fromdate.getMonth() + 1;
+//   // dt = fromdate.getDate();
+//   // todt = todate.getDate();
+//   // if (dt < 10) {
+//   //   dt = "0" + dt;
+//   // }
+//   // if (month < 10) {
+//   //   month = "0" + month;
+//   // }
+//   // TimeTable.create((err, newtt) => {
+//   //   if (err) {
+//   //     req.flash("error", "Something went wrong");
+//   //     res.redirect("back");
+//   //     console.log(err);
+//   //   } else {
 
-  //     newtt.shift1_1 = req.body.shift1_1;
-  //     newtt.shift2_1 = req.body.shift2_1;
-  //     newtt.shift3_1 = req.body.shift3_1;
-  //     newtt.shift1_2 = req.body.shift1_2;
-  //     newtt.shift2_2 = req.body.shift2_2;
-  //     newtt.shift3_2 = req.body.shift3_2;
-  //     newtt.shift1_3 = req.body.shift1_3;
-  //     newtt.shift2_3 = req.body.shift2_3;
-  //     newtt.shift3_3 = req.body.shift3_3;
-  //     newtt.shift1_4 = req.body.shift1_4;
-  //     newtt.shift2_4 = req.body.shift2_4;
-  //     newtt.shift3_4 = req.body.shift3_4;
-  //     newtt.shift1_5 = req.body.shift1_5;
-  //     newtt.shift2_5 = req.body.shift2_5;
-  //     newtt.shift3_5 = req.body.shift3_5;
-  //     newtt.from = req.body.from_tt;
-  //     newtt.to = req.body.to_tt;
+//   //     newtt.shift1_1 = req.body.shift1_1;
+//   //     newtt.shift2_1 = req.body.shift2_1;
+//   //     newtt.shift3_1 = req.body.shift3_1;
+//   //     newtt.shift1_2 = req.body.shift1_2;
+//   //     newtt.shift2_2 = req.body.shift2_2;
+//   //     newtt.shift3_2 = req.body.shift3_2;
+//   //     newtt.shift1_3 = req.body.shift1_3;
+//   //     newtt.shift2_3 = req.body.shift2_3;
+//   //     newtt.shift3_3 = req.body.shift3_3;
+//   //     newtt.shift1_4 = req.body.shift1_4;
+//   //     newtt.shift2_4 = req.body.shift2_4;
+//   //     newtt.shift3_4 = req.body.shift3_4;
+//   //     newtt.shift1_5 = req.body.shift1_5;
+//   //     newtt.shift2_5 = req.body.shift2_5;
+//   //     newtt.shift3_5 = req.body.shift3_5;
+//   //     newtt.from = req.body.from_tt;
+//   //     newtt.to = req.body.to_tt;
 
-  //     newtt.save();
+//   //     newtt.save();
 
-  //     res.render("timeTable", { timeTable : newtt });
-  //   }
-  // });
+//   //     res.render("timeTable", { timeTable : newtt });
+//   //   }
+//   // });
   
-  // TimeTable.find({}).exec((err,tt)=> {
-  //   var timeTable = tt;
-  //   if (err) {
-  //     req.flash("error", "leave not found with this id");
-  //     res.redirect("back");
-  //   } else{
-  //     timeTable.shifts.updateMany(
-  //       {}, //match all
-  //       {
-  //         $set: {
-  //           shift1_1: req.body.shift1_1,
-  //           shift2_1: req.body.shift2_1,
-  //           shift3_1: req.body.shift3_1,
-  //           shift1_2: req.body.shift1_2,
-  //           shift2_2: req.body.shift2_1,
-  //           shift3_2: req.body.shift3_1,
-  //           shift1_3: req.body.shift1_3,
-  //           shift2_3: req.body.shift2_3,
-  //           shift3_3: req.body.shift3_3,
-  //           shift1_4: req.body.shift1_4,
-  //           shift2_4: req.body.shift2_4,
-  //           shift3_4: req.body.shift3_4,
-  //           shift1_5: req.body.shift1_5,
-  //           shift2_5: req.body.shift2_5,
-  //           shift3_5: req.body.shift3_5,
-  //         },
-  //       },
-  //       {
-  //         multi: true,
-  //       }
-  //     );
-  //   res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable");
-  // }
-});
+//   // TimeTable.find({}).exec((err,tt)=> {
+//   //   var timeTable = tt;
+//   //   if (err) {
+//   //     req.flash("error", "leave not found with this id");
+//   //     res.redirect("back");
+//   //   } else{
+//   //     timeTable.shifts.updateMany(
+//   //       {}, //match all
+//   //       {
+//   //         $set: {
+//   //           shift1_1: req.body.shift1_1,
+//   //           shift2_1: req.body.shift2_1,
+//   //           shift3_1: req.body.shift3_1,
+//   //           shift1_2: req.body.shift1_2,
+//   //           shift2_2: req.body.shift2_1,
+//   //           shift3_2: req.body.shift3_1,
+//   //           shift1_3: req.body.shift1_3,
+//   //           shift2_3: req.body.shift2_3,
+//   //           shift3_3: req.body.shift3_3,
+//   //           shift1_4: req.body.shift1_4,
+//   //           shift2_4: req.body.shift2_4,
+//   //           shift3_4: req.body.shift3_4,
+//   //           shift1_5: req.body.shift1_5,
+//   //           shift2_5: req.body.shift2_5,
+//   //           shift3_5: req.body.shift3_5,
+//   //         },
+//   //       },
+//   //       {
+//   //         multi: true,
+//   //       }
+//   //     );
+//   //   res.redirect("/warden/6228f7ce3b00b39f6c88cd36/timeTable");
+//   // }
+// });
 
 //   timeTable.findAndUpdate({ "ID" : "1"},
 //   {"shift1_1": req.body.shift1_1,
