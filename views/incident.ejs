@@ -1,0 +1,102 @@
+<% include ./partial/header %>
+
+<form action="/warden/6228f7ce3b00b39f6c88cd36/saveIncident" method="POST" id="incident>
+    <div class="container">
+        <table class="content-table"
+            style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
+            <tr
+                style="background-color: rgb(9, 1, 19); border-radius: 5px 5px 0 0;overflow: hidden;  color: #ffffff;text-align: left; font-weight: bold;">
+                <th>
+                    Incident heading
+                </th>
+                <th>
+                    Incident location
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Description
+                </th>
+
+                <th>
+                    Precaution
+                </th>
+ 
+
+
+            </tr>
+
+            <%incodents.forEach(function(incident){%>
+
+                <tr>
+                  <td><%=incident.heading%></td>
+                  <td><%=incodent.location%></td>
+                  <td><%=moment(incident,date).format('DD/MM/YYYY')%></td>
+                  <td><%=incident.description%></td>
+                  <td><%=incident.precaution%></td>
+
+            <tr>
+                <td><input type="text" name="Incident_heading" placeholder="Incident heading" id="incident_heading" required> </td>
+                <td><input type="text" name="Incident_location" placeholder="Incident_location" id="incident_location" required></td>
+                <td><input type="date" name="date" id="date" required></td>
+                <td><input type="text" name="Description" placeholder="Description" id="Description" required></td>
+                <td><input type="text" name="Precaution" placeholder="Precaution" id="Precaution" required></td>
+            </tr>
+
+
+
+        </table>
+       
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-success btn-sm" style="width: 100px; margin-top: 40px">Save</button>
+    </div>
+
+    <!-- <div style="text-align:center">
+        <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Submit</a>
+    </div> -->
+    <div style="text-align:center">
+        <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+    </div>
+
+    <!-- <div style="text-align:center">
+        <a href="" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Edit</a>
+    </div> -->
+    
+    </div>
+</form>
+
+<form action="/student/<%=student._id%>/apply" method="POST">
+    <div class="form-group">
+      <input
+        type="text"
+        placeholder="subject"
+        name="leave[subject]"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="from">From:</label>
+      <input
+        type="date"
+        data-date-inline-picker="true"
+        id="from"
+        name="leave[from]"
+      />
+    </div>
+    <div class="form-group">
+      <label for="to">To:</label>
+      <input
+        type="date"
+        data-date-inline-picker="true"
+        id="to"
+        name="leave[to]"
+      />
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-lg btn-block btn-default">Submit</button>
+    </div>
+  </form>
+
+    <% include ./partial/footer %>
