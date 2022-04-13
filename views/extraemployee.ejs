@@ -15,6 +15,12 @@
                 <th>
                     Phone Number
                 </th>
+                <th>
+                  No. of days worked
+              </th>
+              <th>
+                Salary
+            </th>
             </tr>
             <%employees.forEach(function(employee){%>
                 <tr>
@@ -27,6 +33,13 @@
                     <td>
                       <%=employee.ContactNo%>
                     </td>
+                    <td>
+                      <%=employee.workingdays%>
+                    </td>
+                    <% var salary=500*employee.workingdays%>
+                    <td>
+                      <%=salary%>
+                    </td>
                 </tr>
                 <% }) %>
 
@@ -35,7 +48,9 @@
        
     
     </div>
-
+    <div style="text-align:center">
+      <a href="/warden/home" class="btn btn-info btn-sm" style="width: 100px; margin-top: 40px">Back</a>
+  </div>
 
 
 
