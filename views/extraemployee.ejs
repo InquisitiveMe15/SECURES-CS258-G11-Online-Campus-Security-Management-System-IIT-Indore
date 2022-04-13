@@ -15,6 +15,12 @@
                 <th>
                     Phone Number
                 </th>
+                <th>
+                  No. of days worked
+              </th>
+              <th>
+                Salary
+            </th>
             </tr>
             <%employees.forEach(function(employee){%>
                 <tr>
@@ -26,6 +32,12 @@
                     </td>
                     <td>
                       <%=employee.ContactNo%>
+                    </td>
+                    <td>
+                      <%=employee.workingdays%>
+                    </td>
+                    <td>
+                      <%=employee.salary%>
                     </td>
                 </tr>
                 <% }) %>
