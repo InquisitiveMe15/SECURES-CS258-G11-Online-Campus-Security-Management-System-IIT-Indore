@@ -4,20 +4,22 @@ style=" position: relative;
 border-radius: 5px;
 background-color: #f2f2f2;
 padding: 20px 0 30px 0;
+margin-top: 70px;
 width: 40%;
+
 
 ">
   
       <form action="/warden/<%=warden._id%>?_method=PUT" method="POST">
         <div class="row">
           <div class="col">
-            <h1 style="text-align:center;">Edit Profile<%= warden.name%></h1>
+            <h1 style="text-align:center;">Edit Profile, <%= warden.name%></h1>
             <div class="form-group form-inline">
               <label
                 for="name"
                 style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     "
                 >Name</label
               >
@@ -34,7 +36,7 @@ width: 40%;
                 for="username"
                 style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     "
                 >Username</label
               >
@@ -49,7 +51,7 @@ width: 40%;
             <div class=" form-group form-inline">
               <label for="phonenumber" style="width: 200px;
               display: inline-block;
-              text-align: right;
+              text-align: center;
               ">Phone Number</label>
             <input
               class="form-control"
@@ -62,7 +64,7 @@ width: 40%;
           <div class=" form-group form-inline">
               <label for="emailid" style="width: 200px;
               display: inline-block;
-              text-align: right;
+              text-align: center;
               ">Email Id</label>
             <input
               class="form-control"
@@ -77,7 +79,7 @@ width: 40%;
                 for="hostel"
                 style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     "
                 >Office</label
               >
@@ -95,7 +97,7 @@ width: 40%;
                 for="url"
                 style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     "
                 >Image-url</label
               >
@@ -113,7 +115,9 @@ width: 40%;
           </div>
         </div>
       </form>
-      <a href="/warden/<%= warden._id%>">Back</a>
+      <div style="text-align: center;">
+      <a href="/warden/<%= warden._id%>" >Back</a>
+    </div>
     </div>
   </div>
 </div>

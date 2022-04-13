@@ -6,6 +6,7 @@ body {
   font-family: "Comfortaa", cursive;
   -webkit-font-smoothing: antialiased;
   background-color: #bccccc;
+  
   /* overflow: hidden; */
 }
 .jumbotron {
@@ -17,9 +18,10 @@ body {
   z-index: 2;
   border-width: 0ch;
   border-color: #535555;
-  text-align: center;
+  text-align: center !important;
   padding: 25px 0;
 }
+
 .btn {
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
@@ -163,4 +165,15 @@ li a:hover {
   margin-top: 0px;
   padding:30px;
   background-color: #5f5f6d;;
+}
+.footer{
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin-top: 130px;
+  /* background-color: red;
+  color: white; */
+  text-align: center;
+
 }
