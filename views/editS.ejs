@@ -15,11 +15,11 @@ width: 40%;
       <form action="/student/<%=student._id%>?_method=PUT" method="POST" style="margin-top: 20px;">
         <div class="row">
           <div class="col">
-              <h1 style="text-align:center;">Edit Profile <%= student.name%></h1>
+              <h1 style="text-align:center;">Edit Profile, <%= student.name%></h1>
               <div class=" form-group form-inline">
                   <label for="name" style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: center;
                   ">Name</label>
                   <input
                     class="form-control"
@@ -32,7 +32,7 @@ width: 40%;
                 <div class=" form-group form-inline">
                     <label for="username" style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     ">Username</label>
                   <input
                     class="form-control"
@@ -45,7 +45,7 @@ width: 40%;
                 <div class=" form-group form-inline">
                     <label for="phonenumber" style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     ">Phone Number</label>
                   <input
                     class="form-control"
@@ -58,7 +58,7 @@ width: 40%;
                 <div class=" form-group form-inline">
                     <label for="emailid" style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     ">Email Id</label>
                   <input
                     class="form-control"
@@ -71,7 +71,7 @@ width: 40%;
                 <div class=" form-group form-inline">
                     <label for="hostel" style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     ">Office</label>
                   <input
                     class="form-control"
@@ -84,7 +84,7 @@ width: 40%;
                 <div class=" form-group form-inline">
                     <label for="url" style="width: 200px;
                     display: inline-block;
-                    text-align: right;
+                    text-align: center;
                     ">Image-url</label>
                   <input
                     class="form-control"
@@ -95,13 +95,15 @@ width: 40%;
                   />
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-lg btn-default btn-block">Submit</button>
+                  <button class="btn btn-lg btn-primary btn-block">Submit</button>
                 </div>
           </div>
         </div>
         
       </form>
+      <div style="text-align: center;">
       <a href="/student/<%= student.id%>">Back</a>
+    </div>
     </div>
   </div>
 </div>

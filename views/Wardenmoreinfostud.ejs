@@ -1,7 +1,7 @@
 <% include ./partial/header %>
 <div
-  class="col-sm-9"
-  style="margin: auto; margin-top: 35px; text-align: -webkit-center; "
+  class="col-sm-12"
+  style="margin: auto; margin-top: 35px; margin-left: 100px; text-align: -webkit-center; "
 >
   <form
     action="/warden/<%=warden.id%>/leave/<%=leave._id%>/<%=student.id%>/info"
@@ -11,7 +11,7 @@
       class="container-fluid bg-3 text-center"
       
     >
-      <h1><%=student.name%></h1>
+      <h1><strong><%=student.name%></strong></h1>
       <br />
       <div class="row">
         <div class="col-sm-4">
@@ -24,11 +24,10 @@
         
         <div class="col-sm-4">
           <h3><strong> Subject: </strong><%=leave.subject %></h3>
-          <h3>Status: <%=leave.wardenstatus %></h3>
-          <h3>From: <%=moment(leave.from).format('DD/MM/YYYY') %></h3>
-          <h3>To: <%=moment(leave.to).format('DD/MM/YYYY') %></h3>
-          <h3>Days: <%=leave.days%></h3>
-          <h3>Department:<%=student.hostel %></h3>
+          <h3><strong>Status:</strong> <%=leave.wardenstatus %></h3>
+          <h3><strong>From:</strong> <%=moment(leave.from).format('DD/MM/YYYY') %></h3>
+          <h3><strong>To:</strong> <%=moment(leave.to).format('DD/MM/YYYY') %></h3>
+          <h3><strong>Days:</strong> <%=leave.days%></h3>
           <div style="float:inherit">
             <input
               type="submit"
