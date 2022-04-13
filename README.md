@@ -34,7 +34,7 @@ From here, the manager can register new Employees, it is secured by the password
 There are two logins provided under the login tab in the navbar, one for the security manager and one for the employees.  
 
 ##  After login in
-The navbar will display the site name i.e. **SECURES** , if we click on it it will redirect to the home page and the **Logout** buttton.  
+The navbar will display the site name i.e. **SECURES** , and the **Logout** buttton.  
 
 ## Security Manager Side Interface
 This is the home page of the manager side.  
