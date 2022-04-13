@@ -8,29 +8,47 @@
       </div>
       <% } %>
 </div>
+
+
+
 <div
   class="container"
   style=" position: relative;
 border-radius: 5px;
 background-color: #f2f2f2;
-padding: 60px 0 30px 0;
-width: 40%;
+padding: 20px 0 30px 0;
+margin:80px auto;margin-top:160px;
+width: 34%;
 "
 
 >
 
         
 
-        <form action="/student/register" method="POST" style="margin: 0 auto;">
+        <form action="/student/register" method="POST" style="margin: 30px auto;">
           <div class="row">
             <div class="col">
-              <h2 style="    text-align: center;">
-                Register
+              <h2 style="text-align: center;letter-spacing: 2px;font-weight: bold;margin-bottom:30px;">
+                REGISTER
               </h2>
+ 
+              <!-- type -->
+              <div id="rates" class="form-group"style="width: 400px;
+              display: inline-block;
+              text-align: center;
+              ">
+                <input type="radio" id="r1" name="type" value="student"  />
+                Employee
+                <!-- <input type="radio" id="r2" name="type" value="hod" />
+                HOD -->
+                <input type="radio" id="r3" name="type" value="warden" style="margin-left:40px;" />
+                Warden
+              </div>
+
               <div class="form-group form-inline">
                 <label for="name" style="width: 200px;
                 display: inline-block;
-                text-align: right;
+                text-align: left;
                 ">Name</label>
                 <input
                   class="form-control"
@@ -38,29 +56,17 @@ width: 40%;
                   id="name"
                   placeholder="name"
                   name="name"
-                  style="float: left;;
+                  style="float: left;
                   text-align: left;
                   "
                 />
-              </div>
-              <!-- type -->
-              <div id="rates" class="form-group"style="width: 400px;
-              display: inline-block;
-              text-align: right;
-              ">
-                <input type="radio" id="r1" name="type" value="student" />
-                Employee
-                <!-- <input type="radio" id="r2" name="type" value="hod" />
-                HOD -->
-                <input type="radio" id="r3" name="type" value="warden" />
-                Warden
               </div>
 
               <!-- id -->
               <div class="form-group form-inline">
                   <label for="username" style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: left;
                   ">Username</label>
                 <input
                   class="form-control"
@@ -74,7 +80,7 @@ width: 40%;
               <div class="form-group form-inline">
                   <label for="password"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: left;
                   ">Password</label>
                 <input
                   class="form-control"
@@ -88,7 +94,7 @@ width: 40%;
               <div class="form-group form-inline">
                   <label for="cpassword"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: left;
                   ">Confirm Password</label>
                 <input
                   class="form-control"
@@ -102,7 +108,7 @@ width: 40%;
               <div class="form-group form-inline">
                   <label for="phonenumber"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: left;
                   ">Phone Number</label>
                 
                 <input
@@ -118,7 +124,7 @@ width: 40%;
               <div class="form-group form-inline">
                   <label for="emailid"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: left;
                   ">Email Id</label>
                 
                 <input
@@ -134,7 +140,7 @@ width: 40%;
               <div class="form-group form-inline">
                   <label for="hostel"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: left;
                   ">Office</label>
                 <!-- <label for="hostel">Hostel</label> -->
                 <input
@@ -149,7 +155,7 @@ width: 40%;
               <div class="form-group form-inline">
                   <label for="img"style="width: 200px;
                   display: inline-block;
-                  text-align: right;
+                  text-align: left;
                   ">Image Url</label>
                 <input
                   class="form-control"
@@ -164,7 +170,7 @@ width: 40%;
                 <button
                   type="submit"
                   class="btn btn-lg btn-primary btn-default btn-block"
-                  style=" color:#fff;"
+                  style=" color:#fff;margin-top:40px;"
                 >
                   Submit
                 </button>
@@ -174,7 +180,7 @@ width: 40%;
           <!-- name -->
         </form>
 
-        <a href="/">Back</a>
+        <a href="/" style="margin-left:35px;">Back</a>
       </div>
     </div>
   </div>

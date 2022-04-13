@@ -18,7 +18,7 @@ body {
   border-width: 0ch;
   border-color: #535555;
   text-align: center;
-  padding: 25px 0;
+  padding: 90px 0;
 }
 .btn {
   -webkit-transition-duration: 0.4s; /* Safari */
@@ -31,6 +31,10 @@ body {
 }
 ul {
   list-style: none;
+}
+
+.carouselimages{
+  opacity:0.7;
 }
 
 h1,
@@ -67,7 +71,7 @@ p {
   margin-bottom:0px;
 }
 .fixed-height {
-  max-height: 600px;
+  max-height: 750px;
 }
 .carousel-item {
   min-height: 300px;
@@ -81,15 +85,15 @@ p {
 } */
 
 .carousel-caption h5 {
-  font-size: 45px;
+  font-size: 55px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 25px;
+  letter-spacing: 3.4px;
+  margin-top: 12px;
 }
 .carousel-caption p {
   width: 75%;
   margin: auto;
-  font-size: 20px;
+  font-size: 26px;
   line-height: 1.9;
 }
 li a:hover {
@@ -161,6 +165,10 @@ li a:hover {
 }
 .info{
   margin-top: 0px;
-  padding:30px;
+  padding:70px;
   background-color: #5f5f6d;;
+}
+
+label{
+  float:left;
 }
