@@ -8,9 +8,9 @@ The Online Campus Security Management System (Secures) provides an interface for
 ## Technology Stack Used :
 
 - Backend : NodeJS,
-- Database : Mongodb
-- FrontEnd : Javascript, HTML, CSS, Bootstrap
-- Framework : Express
+- Database : MongoDB
+- FrontEnd : JavaScript, HTML, CSS, Bootstrap
+- Framework : Express.js
 
 ## Usage
 
