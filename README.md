@@ -33,9 +33,10 @@ On the home page we can get some insights into the security department of the II
 From here, the manager can register new Employees, it is secured by the password system which only he knows.  
 There are two logins provided under the login tab in the navbar, one for the security manager and one for the employees. 
 
-<img width="946" alt="1" src="https://user-images.githubusercontent.com/85685489/163273250-0cf82d18-b6d5-4d7e-89c1-5b8c3d162f49.png">
-<img width="946" alt="2" src="https://user-images.githubusercontent.com/85685489/163273004-a92b8c64-b943-4361-b702-7fbca393c2e3.png">
-<img width="946" alt="3" src="https://user-images.githubusercontent.com/85685489/163273027-b5f67833-439c-4ace-9c21-448c8a4d5c55.png">
+<img width="948" alt="1" src="https://user-images.githubusercontent.com/85685489/163394741-6631b8ef-c20b-49ec-aff7-d9bc82195731.png">
+<img width="947" alt="2" src="https://user-images.githubusercontent.com/85685489/163394767-a9054e27-d9a5-4d59-8d6c-7a87883319e6.png">
+<img width="946" alt="3" src="https://user-images.githubusercontent.com/85685489/163394809-fb0069c3-5fe6-4bf4-8ad5-cbf4577b13fb.png">
+
 
 ##  After login in
 The navbar will display the site name i.e. **SECURES** , and the **Logout** buttton.  
