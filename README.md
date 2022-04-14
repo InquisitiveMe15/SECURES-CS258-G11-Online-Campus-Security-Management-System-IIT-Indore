@@ -34,8 +34,9 @@ From here, the manager can register new Employees, it is secured by the password
 There are two logins provided under the login tab in the navbar, one for the security manager and one for the employees. 
 
 <img width="948" alt="1" src="https://user-images.githubusercontent.com/85685489/163394741-6631b8ef-c20b-49ec-aff7-d9bc82195731.png">
-<img width="947" alt="2" src="https://user-images.githubusercontent.com/85685489/163394767-a9054e27-d9a5-4d59-8d6c-7a87883319e6.png">
-<img width="946" alt="3" src="https://user-images.githubusercontent.com/85685489/163394809-fb0069c3-5fe6-4bf4-8ad5-cbf4577b13fb.png">
+<img width="948" alt="2" src="https://user-images.githubusercontent.com/78892305/163397714-dae3a4c1-d6a6-4c05-b1f3-0e3986d72195.png">
+<img width="948" alt="3" src="https://user-images.githubusercontent.com/78892305/163397750-715ea556-4691-46f4-97f9-38302c28e23f.png">
+
 
 
 ##  After login in
