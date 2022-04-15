@@ -1202,6 +1202,7 @@ app.get("/warden/:id/incident", (req, res) => {
           res.render("incident", {
             warden: wardenFound,
             incidents:incidents,
+            moment: moment
           });
         }
       });

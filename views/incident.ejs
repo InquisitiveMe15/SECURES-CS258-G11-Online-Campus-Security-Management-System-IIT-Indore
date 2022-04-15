@@ -1,6 +1,6 @@
 <% include ./partial/header %>
 
-<form action="/warden/6228f7ce3b00b39f6c88cd36/saveIncident" method="GET" id="incident>
+<form action="/warden/6228f7ce3b00b39f6c88cd36/saveIncident" method="POST" id="incident>
     <div class="container">
         <table class="content-table"
             style="margin: 50px auto;min-width:400px;width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
@@ -32,7 +32,7 @@
                 <tr>
                   <td><%=incident.heading%></td>
                   <td><%=incident.location%></td>
-                  <td><%=incident.date%></td>
+                  <td><%=moment(incident.date).format('DD/MM/YYYY')%></td>
                   <td><%=incident.description%></td>
                   <td><%=incident.precaution%></td>
                 </tr>
