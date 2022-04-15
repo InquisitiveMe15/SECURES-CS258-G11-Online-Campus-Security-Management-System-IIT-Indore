@@ -16,6 +16,7 @@ var express = require("express"),
 
   // Hod = require("./models/hod"),
   Leave = require("./models/leave");
+  Incidents = require("./models/incidents");
 
 var moment = require("moment");
 const { ObjectId } = require("mongoose");
@@ -1180,6 +1181,90 @@ app.post("/warden/:id/calculateMonthlySalary", (req, res) => {
 //         res.redirect("/warden/62223f9190e9493a2819e287/timeTable");
 //     }
 
+// });
+
+
+app.get("/warden/:id/incident", (req, res) => {
+  Warden.findById(req.params.id).exec((err, wardenFound) => {
+    if (err) {
+      req.flash("error", "warden not found with requested id");
+      res.redirect("back");
+    } else {
+      Incidents.find().exec((err,incidents) => {
+        if (err) {
+          req.flash("error", "incident not found with your department");
+          res.redirect("back");
+        } else {
+          incidents.forEach(function (incident) {
+            console.log(incident);
+          });
+      
+          res.render("incident", {
+            warden: wardenFound,
+            incidents:incidents,
+          });
+        }
+      });
+    }
+  });
+});
+app.post("/warden/:id/incident", (req, res) => {
+  Warden.findById(req.params.id).exec((err, wardenFound) => {
+    if (err) {
+      req.flash("error", "warden not found with requested id");
+      res.redirect("back");
+    } else {
+       console.log(req.body);
+       var heading=req.body.heading;
+       var location=req.body.location;
+       var date=req.body.date;
+       var description=req.body.description;
+       var precaution=req.body.precaution;
+      let newincident=new Incident({heading:heading,location:location,date:date,description:description,precaution:precaution});
+
+      newincident.save()
+   .then(doc => {
+     console.log(doc)
+   })
+   .catch(err => {
+     console.error(err)
+   })
+      
+      res.render("incident", {
+        warden: wardenFound,
+        moment: moment,
+      });
+  
+
+    }
+  });
+});
+
+// app.get("/warden/:id/incident", (req, res) => {
+//   Warden.findById(req.params.id).exec((err, wardenFound) => {
+//     if (err) {
+//       req.flash("error", "warden not found with requested id");
+//       res.redirect("back");
+//     } else {
+//       incidents.findById(req.params.id)
+//         .populate("incidents")
+//         .exec((err, incidents) => {
+//           if (err) {
+//             req.flash("error", "incident not found with this id");
+//             res.redirect("back");
+//           } else {
+
+//                   res.render("incident", {
+//                     // student: foundStudent,
+//                     incidents: incidents,
+//                     warden: wardenFound,
+//                     moment: moment,
+//                   });
+
+//           }
+//         });
+//     }
+//   });
 // });
 
 //logout for student
