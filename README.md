@@ -74,11 +74,13 @@ This button will redirect to the page where manager has to enter month number to
 <img width="960" alt="11" src="https://user-images.githubusercontent.com/85685489/163274528-78c6eef3-8fbb-4de3-a62d-8dd861522f4c.png">
 <img width="947" alt="12" src="https://user-images.githubusercontent.com/85685489/163274639-263b8862-f4b3-47fa-b789-489b3c32a525.png">
 
-Fifth and last one is **Extra Employee**  
+Fifth is **Extra Employee**  
 Since the most important feature of this site is that not any place should be without a security guard, so in case id any employee is on leave then we can appoint other person in his place from the extra employee list. Their salary will be calculated separately.  
 <img width="948" alt="13" src="https://user-images.githubusercontent.com/85685489/163274729-a9b74723-6508-4eb1-beb6-d744bdf9ebc3.png">
 
-
+Sixth is **Incident report**
+The manager can report the incidents in the campus with their location, date, description and the necessary precautions.
+![Screenshot (114)](https://user-images.githubusercontent.com/77117509/163662755-a2e23cc7-076f-498e-83d3-bd19133707a3.png)
 
 ## Employee Side Interface
 This is the homepage of the employee side.  
