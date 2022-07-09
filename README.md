@@ -1,9 +1,9 @@
-# SECURES-CS258-G11-Online-Campus-Security-Management-System-IIT-Indore
+# SECURES-CS258-G11-Campus-Security-Personnel-Management-System-IIT-Indore
 Team Members : Neha, Kanchi Pardhi, Khushi Verma, Shruti Modi
 
 # Security Management System
 
-The Online Campus Security Management System (Secures) provides an interface for both manager and workers to track their tasks on daily basis. IIT Indore has more than thousand security persons, who are instructed to give duties at different places within the campus. Thus, the objective is to build a secure system through which the entire security system within the campus can be managed in an efficient manner. This system will assist the security manager to control security efficiently as manual calculation/operation is a heavy task for the security manager.
+The Online Campus Security Personnel Management System (Secures) provides an interface for both manager and workers to track their tasks on daily basis. IIT Indore has more than thousand security persons, who are instructed to give duties at different places within the campus. Thus, the objective is to build a secure system through which the entire security system within the campus can be managed in an efficient manner. This system will assist the security manager to control security efficiently as manual calculation/operation is a heavy task for the security manager.
 
 ## Technology Stack Used :
 
